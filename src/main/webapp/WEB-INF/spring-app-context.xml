@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="configLocation" value="classpath:hibernate.cfg.xml"/>
+        <property name="annotatedPackages" value="com.karina.icafe.model"/>
+    </bean>
+
+<!--    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">-->
+<!--        <property name="sessionFactory" ref="sessionFactory"/>-->
+<!--    </bean>-->
+
+    <bean id="persistenceExceptionTranslationPostProcessor"
+          class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+
+    <bean id="coffeeSortDaoImpl" class="com.karina.icafe.dao.impl.CoffeeSortDaoImpl" scope="prototype"/>
+
+    <bean id="orderDaoImpl" class="com.karina.icafe.dao.impl.OrderDaoImpl" scope="prototype"/>
+
+    <bean id="orderItemDaoImpl" class="com.karina.icafe.dao.impl.OrderItemDaoImpl" scope="prototype"/>
+
+    <bean id="coffeeSortBean" class="com.karina.icafe.model.CoffeeSort"/>
+
+    <bean id="orderBean" class="com.karina.icafe.model.Order"/>
+
+    <bean id="orderItemBean" class="com.karina.icafe.model.OrderItem"/>
+
+    <bean id="coffeeSortControllerBean" class="com.karina.icafe.controller.CoffeeSortController"/>
+</beans>
