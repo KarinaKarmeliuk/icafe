@@ -3,7 +3,7 @@ package com.karina.icafe.dao;
 import java.util.List;
 
 public interface Dao<T> {
-    T get(long id);
+    T get(int id);
 
     List getAll();
 

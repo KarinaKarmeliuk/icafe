@@ -13,7 +13,7 @@ public class OrderDaoImpl implements Dao<Order> {
     @Autowired
     SessionFactory sessionFactory;
 
-    public Order get(long id) {
+    public Order get(int id) {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
         Order order = session.get(Order.class, id);

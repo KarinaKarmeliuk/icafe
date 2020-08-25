@@ -13,6 +13,7 @@ public class OrderItem implements Serializable {
     private int orderItemID;
 
     @ManyToOne
+    @JoinColumn(name = "id_order")
     private Order order;
 
     @OneToOne

@@ -21,7 +21,8 @@ public class CoffeeSort implements Serializable {
     @Column(name = "disabled")
     private String disabled;
 
-    @OneToOne(mappedBy = "coffeeSort", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "id_order_item")
     private OrderItem orderItem;
 
     public CoffeeSort() {}

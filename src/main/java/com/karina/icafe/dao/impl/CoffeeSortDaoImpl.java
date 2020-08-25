@@ -13,7 +13,7 @@ public class CoffeeSortDaoImpl implements Dao<CoffeeSort> {
     @Autowired
     SessionFactory sessionFactory;
 
-    public CoffeeSort get(long id) {
+    public CoffeeSort get(int id) {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
         CoffeeSort coffeeSort = session.get(CoffeeSort.class, id);

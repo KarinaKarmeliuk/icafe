@@ -14,8 +14,8 @@ public class Order implements Serializable {
     @Column(name = "id_order")
     private int orderID;
 
-    @Column(name = "order_date_time", nullable = false)
-    private Date orderDateTime;
+    @Column(name = "date_time", nullable = false)
+    private Date dateTime;
 
     @Transient
     private double coffeeCost;
@@ -32,7 +32,7 @@ public class Order implements Serializable {
     @Column(name = "delivery_address", nullable = false)
     private double deliveryAddress;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany
     List<OrderItem> orderItemList;
 
     public Order() {}
@@ -45,12 +45,12 @@ public class Order implements Serializable {
         this.orderID = orderID;
     }
 
-    public Date getOrderDateTime() {
-        return orderDateTime;
+    public Date getDateTime() {
+        return dateTime;
     }
 
-    public void setOrderDateTime(Date orderDateTime) {
-        this.orderDateTime = orderDateTime;
+    public void setDateTime(Date orderDateTime) {
+        this.dateTime = orderDateTime;
     }
 
     public double getCoffeeCost() {

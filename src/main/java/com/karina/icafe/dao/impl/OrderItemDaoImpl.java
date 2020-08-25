@@ -16,7 +16,7 @@ public class OrderItemDaoImpl implements Dao<OrderItem> {
     SessionFactory sessionFactory;
 
     @Transactional
-    public OrderItem get(long id) {
+    public OrderItem get(int id) {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
         OrderItem orderItem = session.get(OrderItem.class, id);
