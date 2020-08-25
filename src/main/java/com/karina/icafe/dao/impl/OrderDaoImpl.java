@@ -1,13 +1,10 @@
 package com.karina.icafe.dao.impl;
 
 import com.karina.icafe.dao.Dao;
-import com.karina.icafe.model.CoffeeSort;
 import com.karina.icafe.model.Order;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,19 +14,21 @@ public class OrderDaoImpl implements Dao<Order> {
     SessionFactory sessionFactory;
 
     public Order get(long id) {
-        Session session = sessionFactory.getCurrentSession();
-        Transaction transaction = session.beginTransaction();
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
         Order order = session.get(Order.class, id);
-        transaction.commit();
+        session.getTransaction().commit();
+        session.close();
         return order;
     }
 
     public List<Order> getAll() {
         List<Order> orderList = new LinkedList<>();
-        Session session = sessionFactory.getCurrentSession();
-        Transaction transaction = session.beginTransaction();
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
         List list = session.createSQLQuery("SELECT * FROM orders").addEntity(Order.class).list();
-        transaction.commit();
+        session.getTransaction().commit();
+        session.close();
         for(final Object obj : list)
         {
             orderList.add((Order) obj);
@@ -38,23 +37,26 @@ public class OrderDaoImpl implements Dao<Order> {
     }
 
     public void add(Order order) {
-        Session session = sessionFactory.getCurrentSession();
-        Transaction transaction = session.beginTransaction();
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
         session.save(order);
-        transaction.commit();
+        session.getTransaction().commit();
+        session.close();
     }
 
     public void update(Order order) {
-        Session session = sessionFactory.getCurrentSession();
-        Transaction transaction = session.beginTransaction();
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
         session.update(order);
-        transaction.commit();
+        session.getTransaction().commit();
+        session.close();
     }
 
     public void delete(Order order) {
-        Session session = sessionFactory.getCurrentSession();
-        Transaction transaction = session.beginTransaction();
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
         session.delete(order);
-        transaction.commit();
+        session.getTransaction().commit();
+        session.close();
     }
 }

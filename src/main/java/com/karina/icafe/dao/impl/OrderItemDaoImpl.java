@@ -4,9 +4,9 @@ import com.karina.icafe.dao.Dao;
 import com.karina.icafe.model.OrderItem;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.transaction.Transactional;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,20 +15,23 @@ public class OrderItemDaoImpl implements Dao<OrderItem> {
     @Autowired
     SessionFactory sessionFactory;
 
+    @Transactional
     public OrderItem get(long id) {
-        Session session = sessionFactory.getCurrentSession();
-        Transaction transaction = session.beginTransaction();
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
         OrderItem orderItem = session.get(OrderItem.class, id);
-        transaction.commit();
+        session.getTransaction().commit();
+        session.close();
         return orderItem;
     }
 
     public List<OrderItem> getAll() {
         List<OrderItem> orderItemList = new LinkedList<>();
-        Session session = sessionFactory.getCurrentSession();
-        Transaction transaction = session.beginTransaction();
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
         List list = session.createSQLQuery("SELECT * FROM order_items").addEntity(OrderItem.class).list();
-        transaction.commit();
+        session.getTransaction().commit();
+        session.close();
         for(final Object obj : list)
         {
             orderItemList.add((OrderItem)obj);
@@ -37,23 +40,26 @@ public class OrderItemDaoImpl implements Dao<OrderItem> {
     }
 
     public void add(OrderItem orderItem) {
-        Session session = sessionFactory.getCurrentSession();
-        Transaction transaction = session.beginTransaction();
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
         session.save(orderItem);
-        transaction.commit();
+        session.getTransaction().commit();
+        session.close();
     }
 
     public void update(OrderItem orderItem) {
-        Session session = sessionFactory.getCurrentSession();
-        Transaction transaction = session.beginTransaction();
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
         session.update(orderItem);
-        transaction.commit();
+        session.getTransaction().commit();
+        session.close();
     }
 
     public void delete(OrderItem orderItem) {
-        Session session = sessionFactory.getCurrentSession();
-        Transaction transaction = session.beginTransaction();
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
         session.delete(orderItem);
-        transaction.commit();
+        session.getTransaction().commit();
+        session.close();
     }
 }
