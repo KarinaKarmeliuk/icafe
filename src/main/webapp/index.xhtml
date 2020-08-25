@@ -19,7 +19,7 @@
 
         <h1>Taste the most delicious coffee ever!</h1>
 
-        <rich:dataTable value="#{coffeeSortBean.coffeeSortList}" var="record" rows="3" border="1">
+        <rich:dataTable value="#{coffeeSortBean.coffeeSortList}" var="record">
             <f:facet name="header">
                 <h:outputText value="Coffee Order Table" />
             </f:facet>
@@ -37,13 +37,16 @@
 
             <rich:column>
                 <f:facet name="header">Quantity</f:facet>
-<!--                <h:inputText value="#{orderItemBean.quantity}"/>-->
+                <h:inputText value="#{orderItemBean.quantity}"/>
             </rich:column>
             
             <f:facet name="footer">
                 <h:outputText value="Every #{icafe_vars['eachFreeCoffeeCup_n']} is free!" />
             </f:facet>
         </rich:dataTable>
+
+        <!-- or make navigation-rule (go to orderForm after successful validation in PageController) -->
+        <h:commandButton label="Make order" action="orderForm"/>
 
     </ui:composition>
 </h:body>

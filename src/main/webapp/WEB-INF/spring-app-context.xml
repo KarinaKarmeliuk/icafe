@@ -30,5 +30,7 @@
 
     <bean id="orderItemBean" class="com.karina.icafe.beans.OrderItemBean"/>
 
+    <bean id="validatorBean" class="com.karina.icafe.bo.Validator"/>
+
 <!--    <bean id="coffeeSortControllerBean" class="com.karina.icafe.controller.CoffeeSortController"/>-->
 </beans>

@@ -19,7 +19,6 @@ public class CoffeeSortDaoImpl implements Dao<CoffeeSort> {
         CoffeeSort coffeeSort = session.get(CoffeeSort.class, id);
         session.getTransaction().commit();
         session.close();
-        System.out.println("from get() CoffeeSortDaoImpl");
         return coffeeSort;
     }
 

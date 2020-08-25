@@ -32,7 +32,7 @@ public class Order implements Serializable {
     @Column(name = "delivery_address", nullable = false)
     private double deliveryAddress;
 
-    @OneToMany
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     List<OrderItem> orderItemList;
 
     public Order() {}

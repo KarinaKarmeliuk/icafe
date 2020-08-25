@@ -1,3 +1,5 @@
+CREATE DATABASE icafe_db;
+
 CREATE TABLE coffee_sorts
 (
     id_coffee_sort integer NOT NULL PRIMARY KEY,
@@ -20,3 +22,8 @@ CREATE TABLE orders
     client_name character varying(255) NOT NULL,
     delivery_address character varying(255) NOT NULL
 );
+
+INSERT INTO coffee_sorts VALUES (1, 'Arabica', 5.0, '');
+INSERT INTO coffee_sorts VALUES (2, 'Robusta', 6.5, '');
+INSERT INTO coffee_sorts VALUES (3, 'Latte', 4.0, '');
+INSERT INTO coffee_sorts VALUES (4, 'Mocco', 5.5, 'Y');
