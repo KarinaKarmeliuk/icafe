@@ -15,17 +15,17 @@
     <bean id="persistenceExceptionTranslationPostProcessor"
           class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 
-    <bean id="coffeeSortDaoImpl" class="com.karina.icafe.dao.impl.CoffeeSortDaoImpl" scope="prototype"/>
+    <bean id="coffeeSortDao" class="com.karina.icafe.dao.impl.CoffeeSortDaoImpl"/>
 
-    <bean id="orderDaoImpl" class="com.karina.icafe.dao.impl.OrderDaoImpl" scope="prototype"/>
+    <bean id="orderDao" class="com.karina.icafe.dao.impl.OrderDaoImpl"/>
 
-    <bean id="orderItemDaoImpl" class="com.karina.icafe.dao.impl.OrderItemDaoImpl" scope="prototype"/>
+    <bean id="orderItemDao" class="com.karina.icafe.dao.impl.OrderItemDaoImpl"/>
 
-    <bean id="coffeeSortBean" class="com.karina.icafe.model.CoffeeSort"/>
+    <bean id="coffeeSortBean" class="com.karina.icafe.beans.CoffeeSortBean"/>
 
-    <bean id="orderBean" class="com.karina.icafe.model.Order"/>
+    <bean id="orderBean" class="com.karina.icafe.beans.OrderBean"/>
 
-    <bean id="orderItemBean" class="com.karina.icafe.model.OrderItem"/>
+    <bean id="orderItemBean" class="com.karina.icafe.beans.OrderItemBean"/>
 
-    <bean id="coffeeSortControllerBean" class="com.karina.icafe.controller.CoffeeSortController"/>
+<!--    <bean id="coffeeSortControllerBean" class="com.karina.icafe.controller.CoffeeSortController"/>-->
 </beans>

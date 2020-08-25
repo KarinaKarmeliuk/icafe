@@ -1,8 +1,5 @@
 package com.karina.icafe.model;
 
-import com.karina.icafe.dao.impl.OrderDaoImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
@@ -11,10 +8,6 @@ import java.util.List;
 @Entity
 @Table(name = "orders")
 public class Order implements Serializable {
-
-    @Transient
-    @Autowired
-    private OrderDaoImpl orderItemImpl;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

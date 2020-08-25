@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class OrderItemDaoImpl implements Dao<OrderItem> {
@@ -22,12 +23,16 @@ public class OrderItemDaoImpl implements Dao<OrderItem> {
         return orderItem;
     }
 
-    public List getAll() {
+    public List<OrderItem> getAll() {
+        List<OrderItem> orderItemList = new LinkedList<>();
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        List orderItemList = session.createSQLQuery("SELECT * FROM order_items").
-                addEntity(OrderItem.class).list();
+        List list = session.createSQLQuery("SELECT * FROM order_items").addEntity(OrderItem.class).list();
         transaction.commit();
+        for(final Object obj : list)
+        {
+            orderItemList.add((OrderItem)obj);
+        }
         return orderItemList;
     }
 

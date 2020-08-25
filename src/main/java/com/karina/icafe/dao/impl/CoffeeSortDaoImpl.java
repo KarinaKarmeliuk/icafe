@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class CoffeeSortDaoImpl implements Dao<CoffeeSort> {
@@ -19,15 +20,20 @@ public class CoffeeSortDaoImpl implements Dao<CoffeeSort> {
         Transaction transaction = session.beginTransaction();
         CoffeeSort coffeeSort = session.get(CoffeeSort.class, id);
         transaction.commit();
+        System.out.println("from get() CoffeeSortDaoImpl");
         return coffeeSort;
     }
 
-    public List getAll() {
+    public List<CoffeeSort> getAll() {
+        List <CoffeeSort> coffeeSortList = new LinkedList<>();
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        List coffeeSortList = session.createSQLQuery("SELECT * FROM coffee_sorts").
-                addEntity(CoffeeSort.class).list();
+        List list = session.createSQLQuery("SELECT * FROM coffee_sorts").addEntity(CoffeeSort.class).list();
         transaction.commit();
+        for (final Object obj : list)
+        {
+            coffeeSortList.add((CoffeeSort)obj);
+        }
         return coffeeSortList;
     }
 

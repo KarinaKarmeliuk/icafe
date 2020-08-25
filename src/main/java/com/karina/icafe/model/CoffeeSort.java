@@ -1,18 +1,11 @@
 package com.karina.icafe.model;
 
-import com.karina.icafe.dao.impl.CoffeeSortDaoImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "coffee_sorts")
 public class CoffeeSort implements Serializable {
-
-    @Transient
-    @Autowired
-    private CoffeeSortDaoImpl coffeeSortDaoImpl;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,6 +35,7 @@ public class CoffeeSort implements Serializable {
     }
 
     public String getSortName() {
+        System.out.println("\nSORT NAME " + sortName + "\n");
         return sortName;
     }
 

@@ -1,12 +1,14 @@
 package com.karina.icafe.dao.impl;
 
 import com.karina.icafe.dao.Dao;
+import com.karina.icafe.model.CoffeeSort;
 import com.karina.icafe.model.Order;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class OrderDaoImpl implements Dao<Order> {
@@ -22,12 +24,16 @@ public class OrderDaoImpl implements Dao<Order> {
         return order;
     }
 
-    public List getAll() {
+    public List<Order> getAll() {
+        List<Order> orderList = new LinkedList<>();
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        List orderList = session.createSQLQuery("SELECT * FROM orders").
-                addEntity(Order.class).list();
+        List list = session.createSQLQuery("SELECT * FROM orders").addEntity(Order.class).list();
         transaction.commit();
+        for(final Object obj : list)
+        {
+            orderList.add((Order) obj);
+        }
         return orderList;
     }
 

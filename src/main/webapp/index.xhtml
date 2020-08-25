@@ -19,7 +19,7 @@
 
         <h1>Taste the most delicious coffee ever!</h1>
 
-        <rich:dataTable value="#{coffeeSortControllerBean.coffeeSortList}" var="record">
+        <rich:dataTable value="#{coffeeSortBean.coffeeSortList}" var="record" rows="3" border="1">
             <f:facet name="header">
                 <h:outputText value="Coffee Order Table" />
             </f:facet>
@@ -37,7 +37,7 @@
 
             <rich:column>
                 <f:facet name="header">Quantity</f:facet>
-                <h:inputText value="#{orderItemBean.quantity}"/>
+<!--                <h:inputText value="#{orderItemBean.quantity}"/>-->
             </rich:column>
             
             <f:facet name="footer">
