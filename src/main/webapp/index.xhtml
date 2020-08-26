@@ -17,37 +17,39 @@
                     xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:a4j="http://richfaces.org/a4j"
                     xmlns:rich="http://richfaces.org/rich">
 
-        <h1>Taste the most delicious coffee ever!</h1>
+        <div align="center">
+            <h1>Taste the most delicious coffee ever!</h1>
 
-        <rich:dataTable value="#{coffeeSortBean.coffeeSortList}" var="record">
-            <f:facet name="header">
-                <h:outputText value="Coffee Order Table" />
-            </f:facet>
+            <rich:dataTable value="#{coffeeSortBean.coffeeSortList}" var="record">
+                <f:facet name="header">
+                    <h:outputText value="Coffee Order Table" />
+                </f:facet>
 
 
-            <rich:column>
-                <f:facet name="header">Coffee sort name</f:facet>
-                <h:outputText value="#{record.sortName}"/>
-            </rich:column>
-            
-            <rich:column>
-                <f:facet name="header">Price</f:facet>
-                <h:outputText value="#{record.price}"/>
-            </rich:column>
+                <rich:column>
+                    <f:facet name="header">Coffee sort name</f:facet>
+                    <h:outputText value="#{record.sortName}"/>
+                </rich:column>
 
-            <rich:column>
-                <f:facet name="header">Quantity</f:facet>
-                <h:inputText value="#{orderItemBean.quantity}"/>
-            </rich:column>
-            
-            <f:facet name="footer">
-                <h:outputText value="Every #{icafe_vars['eachFreeCoffeeCup_n']} is free!" />
-            </f:facet>
-        </rich:dataTable>
+                <rich:column>
+                    <f:facet name="header">Price</f:facet>
+                    <h:outputText value="#{record.price}"/>
+                </rich:column>
 
-        <!-- or make navigation-rule (go to orderForm after successful validation in PageController) -->
-        <h:commandButton label="Make order" action="orderForm"/>
+                <rich:column>
+                    <f:facet name="header">Quantity</f:facet>
+                    <h:inputText value="#{orderItemBean.quantity}"/>
+                </rich:column>
 
+                <f:facet name="footer">
+                    <h:outputText value="Every #{icafe_vars['eachFreeCoffeeCup_n']} is free!" />
+                </f:facet>
+            </rich:dataTable>
+
+            <!-- or make navigation-rule (go to orderForm after successful validation in PageController) -->
+            <h:commandButton label="Make order" action="orderForm"/>
+
+        </div>
     </ui:composition>
 </h:body>
 
