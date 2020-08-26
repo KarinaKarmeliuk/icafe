@@ -20,34 +20,35 @@
         <div align="center">
             <h1>Taste the most delicious coffee ever!</h1>
 
-            <rich:dataTable value="#{coffeeSortBean.coffeeSortList}" var="record">
-                <f:facet name="header">
-                    <h:outputText value="Coffee Order Table" />
-                </f:facet>
-
+            <h:form>
+                <rich:dataTable value="#{coffeeSortBean.coffeeSortList}" var="record">
+                    <f:facet name="header">
+                        <h:outputText value="Coffee Order Table" />
+                    </f:facet>
 
                 <rich:column>
                     <f:facet name="header">Coffee sort name</f:facet>
                     <h:outputText value="#{record.sortName}"/>
                 </rich:column>
 
-                <rich:column>
-                    <f:facet name="header">Price</f:facet>
-                    <h:outputText value="#{record.price}"/>
-                </rich:column>
+                    <rich:column>
+                        <f:facet name="header">Price</f:facet>
+                        <h:outputText value="#{record.price}"/>
+                    </rich:column>
 
-                <rich:column>
-                    <f:facet name="header">Quantity</f:facet>
-                    <h:inputText value="#{orderItemBean.quantity}"/>
-                </rich:column>
+                    <rich:column>
+                        <f:facet name="header">Quantity</f:facet>
+                        <h:inputText value="#{orderItemBean.quantity}"/>
+                    </rich:column>
 
-                <f:facet name="footer">
-                    <h:outputText value="Every #{icafe_vars['eachFreeCoffeeCup_n']} is free!" />
-                </f:facet>
-            </rich:dataTable>
+                    <f:facet name="footer">
+                        <h:outputText value="Every #{icafe_vars['eachFreeCoffeeCup_n']} is free!" />
+                    </f:facet>
+                </rich:dataTable>
 
-            <!-- or make navigation-rule (go to orderForm after successful validation in PageController) -->
-            <h:commandButton label="Make order" action="orderForm"/>
+                <!-- or make navigation-rule (go to orderForm after successful validation in PageController) -->
+                <h:commandButton label="Make order" action="orderForm"/>
+            </h:form>
 
         </div>
     </ui:composition>
