@@ -9,34 +9,26 @@ public class OrderItem implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_order_item")
-    private int orderItemID;
+    @Column(name = "id")
+    private int id;
 
     @ManyToOne
     private Order order;
 
-    @OneToOne
-    private CoffeeSort coffeeSort;
-
     @Column(name = "quantity")
     private int quantity;
 
+    @Column(name = "id_coffee_sort")
+    private int id_coffee_sort;
+
     public OrderItem() {}
 
-    public int getOrderItemID() {
-        return orderItemID;
+    public int getId() {
+        return id;
     }
 
-    public void setOrderItemID(int orderItemID) {
-        this.orderItemID = orderItemID;
-    }
-
-    public CoffeeSort getCoffeeSort() {
-        return coffeeSort;
-    }
-
-    public void setCoffeeSort(CoffeeSort coffeeSort) {
-        this.coffeeSort = coffeeSort;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getQuantity() {

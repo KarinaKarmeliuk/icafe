@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
     <title>
@@ -13,41 +13,51 @@
 </h:head>
 
 <h:body>
+
     <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
-                    xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:a4j="http://richfaces.org/a4j"
-                    xmlns:rich="http://richfaces.org/rich">
+                    xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" >
+<!--                    xmlns:a4j="http://richfaces.org/a4j"-->
+<!--                    xmlns:rich="http://richfaces.org/rich">-->
 
         <div align="center">
+
             <h1>Taste the most delicious coffee ever!</h1>
 
+            <br/>
+
             <h:form>
-                <rich:dataTable value="#{coffeeSortBean.coffeeSortList}" var="record">
+                <h:dataTable value="#{coffeeSortBean.coffeeSortList}" var="record"
+                border="1" cellpadding="10">
+                    
                     <f:facet name="header">
                         <h:outputText value="Coffee Order Table" />
                     </f:facet>
 
-                <rich:column>
-                    <f:facet name="header">Coffee sort name</f:facet>
-                    <h:outputText value="#{record.sortName}"/>
-                </rich:column>
+                    <h:column>
+                        <f:facet name="header">Coffee sort name</f:facet>
+                        <h:selectManyCheckbox value = "#{coffeeSortBean.coffeeSortList}">
+                            <f:selectItem itemValue = "#{record.id}" itemLabel="#{record.sortName}"/>
+                        </h:selectManyCheckbox>
+                    </h:column>
 
-                    <rich:column>
-                        <f:facet name="header">Price</f:facet>
+                    <h:column>
+                        <f:facet name="header">Price, $</f:facet>
                         <h:outputText value="#{record.price}"/>
-                    </rich:column>
+                    </h:column>
 
-                    <rich:column>
+                    <h:column>
                         <f:facet name="header">Quantity</f:facet>
                         <h:inputText value="#{orderItemBean.quantity}"/>
-                    </rich:column>
+                    </h:column>
 
                     <f:facet name="footer">
-                        <h:outputText value="Every #{icafe_vars['eachFreeCoffeeCup_n']} is free!" />
+                        <h:outputText value="Each #{icafe_vars['icafe.settings.order.free-cup-rate']} cup is free!" />
                     </f:facet>
-                </rich:dataTable>
+                </h:dataTable>
 
+                <br/>
                 <!-- or make navigation-rule (go to orderForm after successful validation in PageController) -->
-                <h:commandButton label="Make order" action="orderForm"/>
+                <h:commandButton value="Make order" action="orderForm"/>
             </h:form>
 
         </div>

@@ -1,6 +1,6 @@
 package com.karina.icafe.beans;
 
-import com.karina.icafe.dao.impl.CoffeeSortDaoImpl;
+import com.karina.icafe.dao.CoffeeSortDao;
 import com.karina.icafe.model.CoffeeSort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.annotation.SessionScope;
@@ -13,7 +13,7 @@ import java.util.List;
 public class CoffeeSortBean implements Serializable
 {
     @Autowired
-    private CoffeeSortDaoImpl coffeeSortDao;
+    private CoffeeSortDao coffeeSortDao;
 
     private List<CoffeeSort> coffeeSortList;
 

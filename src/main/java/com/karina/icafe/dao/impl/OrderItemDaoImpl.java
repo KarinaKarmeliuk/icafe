@@ -1,65 +1,54 @@
 package com.karina.icafe.dao.impl;
 
-import com.karina.icafe.dao.Dao;
+import com.karina.icafe.dao.OrderItemDao;
 import com.karina.icafe.model.OrderItem;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
+import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.util.LinkedList;
 import java.util.List;
 
-public class OrderItemDaoImpl implements Dao<OrderItem> {
+public class OrderItemDaoImpl extends HibernateDaoSupport implements OrderItemDao {
 
     @Autowired
     SessionFactory sessionFactory;
 
-    @Transactional
-    public OrderItem get(int id) {
-        Session session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        OrderItem orderItem = session.get(OrderItem.class, id);
-        session.getTransaction().commit();
-        session.close();
-        return orderItem;
+    @PostConstruct
+    void init () {
+        setSessionFactory(sessionFactory);
     }
 
+    @Transactional
+    public OrderItem get(int id) {
+        return getHibernateTemplate().getSessionFactory().getCurrentSession().get(OrderItem.class, id);
+    }
+
+    @Transactional
     public List<OrderItem> getAll() {
+        List list = getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery("SELECT a FROM OrderItem a", OrderItem.class).getResultList();
         List<OrderItem> orderItemList = new LinkedList<>();
-        Session session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        List list = session.createSQLQuery("SELECT * FROM order_items").addEntity(OrderItem.class).list();
-        session.getTransaction().commit();
-        session.close();
-        for(final Object obj : list)
+        for (final Object obj : list)
         {
             orderItemList.add((OrderItem)obj);
         }
         return orderItemList;
     }
 
+    @Transactional
     public void add(OrderItem orderItem) {
-        Session session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        session.save(orderItem);
-        session.getTransaction().commit();
-        session.close();
+        getHibernateTemplate().save(orderItem);
     }
 
+    @Transactional
     public void update(OrderItem orderItem) {
-        Session session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        session.update(orderItem);
-        session.getTransaction().commit();
-        session.close();
+        getHibernateTemplate().update(orderItem);
     }
 
+    @Transactional
     public void delete(OrderItem orderItem) {
-        Session session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        session.delete(orderItem);
-        session.getTransaction().commit();
-        session.close();
+        getHibernateTemplate().delete(orderItem);
     }
 }

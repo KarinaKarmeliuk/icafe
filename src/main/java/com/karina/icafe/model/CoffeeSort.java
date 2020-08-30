@@ -9,8 +9,8 @@ public class CoffeeSort implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_coffee_sort")
-    private int coffeeSortID;
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "sort_name", nullable = false)
     private String sortName;
@@ -19,23 +19,21 @@ public class CoffeeSort implements Serializable {
     private double price;
 
     @Column(name = "disabled")
-    private String disabled;
-
-    @OneToOne(mappedBy = "coffeeSort", cascade = CascadeType.ALL, orphanRemoval = true)
-    private OrderItem orderItem;
+    //@org.hibernate.annotations.Type(type="true_false")
+    @org.hibernate.annotations.Type(type="yes_no")
+    private boolean disabled;
 
     public CoffeeSort() {}
 
-    public int getCoffeeSortID() {
-        return coffeeSortID;
+    public int getId() {
+        return id;
     }
 
-    public void setCoffeeSortID(int coffeeSortID) {
-        this.coffeeSortID = coffeeSortID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getSortName() {
-        System.out.println("\nSORT NAME " + sortName + "\n");
         return sortName;
     }
 
@@ -51,29 +49,13 @@ public class CoffeeSort implements Serializable {
         this.price = price;
     }
 
-    public boolean isDisabled() {
-        return "Y".equals(disabled);
-    }
-
-    public String getDisabled() {
+    public boolean isDisabled()
+    {
         return disabled;
     }
 
-    public void setDisabled(Boolean disabled) {
-        this.disabled = (disabled != null && disabled) ? "Y" : "";
-    }
-
-    public void setDisabled(String disabled) {
+    public void setDisabled(final boolean disabled)
+    {
         this.disabled = disabled;
-    }
-
-    public OrderItem getOrderItem()
-    {
-        return orderItem;
-    }
-
-    public void setOrderItem(final OrderItem orderItem)
-    {
-        this.orderItem = orderItem;
     }
 }

@@ -11,8 +11,8 @@ public class Order implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_order")
-    private int orderID;
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "date_time", nullable = false)
     private Date dateTime;
@@ -37,12 +37,12 @@ public class Order implements Serializable {
 
     public Order() {}
 
-    public int getOrderID() {
-        return orderID;
+    public int getId() {
+        return id;
     }
 
-    public void setOrderID(int orderID) {
-        this.orderID = orderID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Date getDateTime() {

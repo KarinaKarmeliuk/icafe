@@ -1,63 +1,56 @@
 package com.karina.icafe.dao.impl;
 
-import com.karina.icafe.dao.Dao;
+import com.karina.icafe.dao.CoffeeSortDao;
 import com.karina.icafe.model.CoffeeSort;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.PostConstruct;
 import java.util.LinkedList;
 import java.util.List;
 
-public class CoffeeSortDaoImpl implements Dao<CoffeeSort> {
+public class CoffeeSortDaoImpl extends HibernateDaoSupport implements CoffeeSortDao {
 
     @Autowired
     SessionFactory sessionFactory;
 
-    public CoffeeSort get(int id) {
-        Session session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        CoffeeSort coffeeSort = session.get(CoffeeSort.class, id);
-        session.getTransaction().commit();
-        session.close();
-        return coffeeSort;
+    @PostConstruct
+    void init () {
+        setSessionFactory(sessionFactory);
     }
 
-    public List<CoffeeSort> getAll() {
-        List <CoffeeSort> coffeeSortList = new LinkedList<>();
-        Session session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        List list = session.createSQLQuery("SELECT * FROM coffee_sorts").addEntity(CoffeeSort.class).list();
-        session.getTransaction().commit();
-        session.close();
+    @Transactional
+    public CoffeeSort get(int id) {
+        return getHibernateTemplate().getSessionFactory().getCurrentSession().get(CoffeeSort.class, id);
+    }
 
+    @Transactional(readOnly = true)
+    public List<CoffeeSort> getAll() {
+        List list = getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery("SELECT a FROM CoffeeSort a", CoffeeSort.class).getResultList();
+        List<CoffeeSort> coffeeSortList = new LinkedList<>();
         for (final Object obj : list)
         {
-            coffeeSortList.add((CoffeeSort)obj);
+            CoffeeSort coffeeSort = (CoffeeSort) obj;
+            if(!coffeeSort.isDisabled())
+                coffeeSortList.add(coffeeSort);
         }
         return coffeeSortList;
     }
 
+    @Transactional
     public void add(CoffeeSort coffeeSort) {
-        Session session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        session.save(coffeeSort);
-        session.getTransaction().commit();
-        session.close();
+        getHibernateTemplate().save(coffeeSort);
     }
 
+    @Transactional
     public void update(CoffeeSort coffeeSort) {
-        Session session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        session.update(coffeeSort);
-        session.getTransaction().commit();
-        session.close();
+        getHibernateTemplate().update(coffeeSort);
     }
 
+    @Transactional
     public void delete(CoffeeSort coffeeSort) {
-        Session session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        session.delete(coffeeSort);
-        session.getTransaction().commit();
-        session.close();
+        getHibernateTemplate().delete(coffeeSort);
     }
 }
