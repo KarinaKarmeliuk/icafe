@@ -12,6 +12,58 @@
     </title>
 </h:head>
 
+<div align="center">
+
+    <h:form>
+        <h:dataTable border="1" cellspacing="6">
+
+            <f:facet name="header">
+                <h:outputText value="Info for delivery" />
+            </f:facet>
+
+            <h:column>
+                <f:facet name="header">Full name</f:facet>
+                <h:inputText value=""/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Address</f:facet>
+                <h:inputText value=""/>
+            </h:column>
+
+        </h:dataTable>
+
+        <br/>
+
+        <h:dataTable border="1" cellspacing="6">
+
+            <f:facet name="header">
+                <h:outputText value="Order" />
+            </f:facet>
+
+            <h:column>
+                <f:facet name="header">Coffee sort name</f:facet>
+                <h:outputText value=""/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Price</f:facet>
+                <h:outputText value=""/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Quntity</f:facet>
+                <h:outputText value=""/>
+            </h:column>
+
+            <f:facet name="footer">
+                <h:outputText value="Total: " />
+            </f:facet>
+        </h:dataTable>
+    </h:form>
+
+</div>
+
 <h:body>
 
 </h:body>

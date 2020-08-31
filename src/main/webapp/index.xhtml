@@ -35,29 +35,34 @@
 
                     <h:column>
                         <f:facet name="header">Coffee sort name</f:facet>
-                        <h:selectManyCheckbox value = "#{coffeeSortBean.coffeeSortList}">
-                            <f:selectItem itemValue = "#{record.id}" itemLabel="#{record.sortName}"/>
-                        </h:selectManyCheckbox>
+                        <h:selectBooleanCheckbox value="#{record.selected}"/>
+                        <h:outputText value="#{record.sortName}"/>
                     </h:column>
 
                     <h:column>
-                        <f:facet name="header">Price, $</f:facet>
-                        <h:outputText value="#{record.price}"/>
+                        <div align="center">
+                            <f:facet name="header">Price, $</f:facet>
+                            <h:outputText value="#{record.price}"/>
+                        </div>
                     </h:column>
 
                     <h:column>
                         <f:facet name="header">Quantity</f:facet>
-                        <h:inputText value="#{orderItemBean.quantity}"/>
+                        <h:inputText id="quantityText" value="#{orderItemBean.selectedCoffeeSortMap[record.id]}">
+                            <f:validator validatorId="cupQuantityValidator"/>
+                        </h:inputText>
+                        <span/>
+                        <h:message for="quantityText" style="color:blue"/>
                     </h:column>
 
                     <f:facet name="footer">
-                        <h:outputText value="Each #{icafe_vars['icafe.settings.order.free-cup-rate']} cup is free!" />
+                        <h:outputText value="*Each #{icafe_vars['icafe.settings.order.free-cup-rate']} cup is free!" />
                     </f:facet>
                 </h:dataTable>
 
                 <br/>
                 <!-- or make navigation-rule (go to orderForm after successful validation in PageController) -->
-                <h:commandButton value="Make order" action="orderForm"/>
+                <h:commandButton value="Make order" action="#{orderItemBean.submit}"/>
             </h:form>
 
         </div>

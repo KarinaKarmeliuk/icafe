@@ -12,5 +12,4 @@ public class OrderBean implements Serializable
 
    @Autowired
     private OrderDao orderDao;
-
 }

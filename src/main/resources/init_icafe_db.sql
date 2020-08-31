@@ -24,10 +24,10 @@ CREATE TABLE orders
     delivery_address character varying(255) NOT NULL
 );
 
-INSERT INTO coffee_sorts VALUES (1, 'Arabica', 5.0, 'N');
-INSERT INTO coffee_sorts VALUES (2, 'Robusta', 6.5, 'N');
-INSERT INTO coffee_sorts VALUES (3, 'Latte', 4.0, 'N');
-INSERT INTO coffee_sorts VALUES (4, 'Mocco', 5.5, 'Y');
+INSERT INTO coffee_sorts VALUES (1, 'Arabica', 5.0, false);
+INSERT INTO coffee_sorts VALUES (2, 'Robusta', 6.5, false);
+INSERT INTO coffee_sorts VALUES (3, 'Latte', 4.0, false);
+INSERT INTO coffee_sorts VALUES (4, 'Mocco', 5.5, true);
 
 drop table coffee_sorts;
 drop table order_items;

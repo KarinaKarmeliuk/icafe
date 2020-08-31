@@ -1,5 +1,4 @@
 package com.karina.icafe.model;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -19,9 +18,13 @@ public class CoffeeSort implements Serializable {
     private double price;
 
     @Column(name = "disabled")
-    //@org.hibernate.annotations.Type(type="true_false")
-    @org.hibernate.annotations.Type(type="yes_no")
     private boolean disabled;
+
+    @Transient
+    private boolean selected;
+
+    @Transient
+    private int cupQuantity;
 
     public CoffeeSort() {}
 
@@ -57,5 +60,25 @@ public class CoffeeSort implements Serializable {
     public void setDisabled(final boolean disabled)
     {
         this.disabled = disabled;
+    }
+
+    public boolean isSelected()
+    {
+        return selected;
+    }
+
+    public void setSelected(final boolean selected)
+    {
+        this.selected = selected;
+    }
+
+    public int getCupQuantity()
+    {
+        return cupQuantity;
+    }
+
+    public void setCupQuantity(final int cupQuantity)
+    {
+        this.cupQuantity = cupQuantity;
     }
 }

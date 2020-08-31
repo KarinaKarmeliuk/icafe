@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.annotation.SessionScope;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 @SessionScope
 public class OrderItemBean implements Serializable {
@@ -13,30 +15,32 @@ public class OrderItemBean implements Serializable {
     @Autowired
     private OrderItemDao orderItemDao;
 
-    private CoffeeSort coffeeSort;
+    @Autowired
+    private CoffeeSortBean coffeeSortBean;
 
-    private int quantity;
+    private Map<Integer, Integer> selectedCoffeeSortMap;
 
-    public CoffeeSort getCoffeeSort()
-    {
-        return coffeeSort;
+    public OrderItemBean() {
+        selectedCoffeeSortMap = new HashMap<>();
     }
 
-    public void setCoffeeSort(final CoffeeSort coffeeSort)
-    {
-        this.coffeeSort = coffeeSort;
-    }
-
-    public void setQuantity(String quantity) {
-        try
+    public String submit() {
+        for(CoffeeSort coffeeSort : coffeeSortBean.getCoffeeSortList())
         {
-            this.quantity = Integer.parseInt(quantity);
-        } catch(NumberFormatException ex) {
-            // inform user
+            if(!coffeeSort.isSelected()) {
+                selectedCoffeeSortMap.remove(coffeeSort.getId());
+            }
         }
+
+        return "orderForm";
     }
 
-    public int getQuantity() {
-        return quantity;
+    public Map<Integer, Integer> getSelectedCoffeeSortMap()
+    {
+        return selectedCoffeeSortMap;
+    }
+
+    public void addToSelectedCoffeeSortMap(Integer id, Integer quantity) {
+        selectedCoffeeSortMap.put(id, quantity);
     }
 }
