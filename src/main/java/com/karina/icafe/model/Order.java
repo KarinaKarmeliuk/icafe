@@ -34,7 +34,7 @@ public class Order implements Serializable {
     private double deliveryAddress;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<OrderItem> orderItemList;
+    private List<OrderItem> orderItemList;
 
     public Order() {
         orderItemList = new ArrayList<>();
@@ -96,4 +96,13 @@ public class Order implements Serializable {
         this.deliveryAddress = deliveryAddress;
     }
 
+    public List<OrderItem> getOrderItemList()
+    {
+        return orderItemList;
+    }
+
+    public void setOrderItemList(final List<OrderItem> orderItemList)
+    {
+        this.orderItemList = orderItemList;
+    }
 }

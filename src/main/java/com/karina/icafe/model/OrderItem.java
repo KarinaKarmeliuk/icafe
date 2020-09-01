@@ -19,11 +19,8 @@ public class OrderItem implements Serializable {
     @Column(name = "quantity")
     private int quantity;
 
-    // @Column(name = "id_coffee_sort")
-    // private int id_coffee_sort;
-    @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
-    private CoffeeSort coffeeSort;
+    @Column(name = "id_coffee_sort")
+    private int idCoffeeSort;
 
     public OrderItem() {}
 
@@ -43,14 +40,24 @@ public class OrderItem implements Serializable {
         this.quantity = quantity;
     }
 
-    public CoffeeSort getCoffeeSort()
+    public Order getOrder()
     {
-        return coffeeSort;
+        return order;
     }
 
-    public void setCoffeeSort(final CoffeeSort coffeeSort)
+    public void setOrder(final Order order)
     {
-        this.coffeeSort = coffeeSort;
+        this.order = order;
+    }
+
+    public int getIdCoffeeSort()
+    {
+        return idCoffeeSort;
+    }
+
+    public void setIdCoffeeSort(final int idCoffeeSort)
+    {
+        this.idCoffeeSort = idCoffeeSort;
     }
 
     @Override
@@ -65,12 +72,12 @@ public class OrderItem implements Serializable {
             return false;
         }
         OrderItem orderItem = (OrderItem) o;
-        return id == orderItem.id && quantity == orderItem.quantity && Objects.equals(order, orderItem.order) && Objects.equals(coffeeSort, orderItem.coffeeSort);
+        return id == orderItem.id && quantity == orderItem.quantity && idCoffeeSort == orderItem.idCoffeeSort && Objects.equals(order, orderItem.order);
     }
 
     @Override
     public int hashCode()
     {
-        return Objects.hash(id, order, quantity, coffeeSort);
+        return Objects.hash(id, order, quantity, idCoffeeSort);
     }
 }

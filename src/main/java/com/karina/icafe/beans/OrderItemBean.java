@@ -14,8 +14,8 @@ import java.util.Map;
 @SessionScope
 public class OrderItemBean implements Serializable {
 
-    @Autowired
-    private OrderItemDao orderItemDao;
+    // @Autowired
+    // private OrderItemDao orderItemDao;
 
     @Autowired
     private CoffeeSortDao coffeeSortDao;
@@ -30,6 +30,7 @@ public class OrderItemBean implements Serializable {
     }
 
     public String submit() {
+        // preparing order
         for(CoffeeSort coffeeSort : coffeeSortBean.getCoffeeSortList())
         {
             if(!coffeeSort.isSelected()) {
@@ -37,13 +38,13 @@ public class OrderItemBean implements Serializable {
             }
         }
 
-        for(final Integer id : selectedCoffeeSortMap.keySet())
-        {
-            OrderItem orderItem = new OrderItem();
-            orderItem.setQuantity(Integer.parseInt(selectedCoffeeSortMap.get(id)));
-            orderItem.setCoffeeSort(coffeeSortDao.get(id));
-            orderItemDao.add(orderItem);
-        }
+        // for(final Integer id : selectedCoffeeSortMap.keySet())
+        // {
+        //     OrderItem orderItem = new OrderItem();
+        //     orderItem.setQuantity(Integer.parseInt(selectedCoffeeSortMap.get(id)));
+        //     orderItem.setIdCoffeeSort(id);
+        //     orderItemDao.add(orderItem);
+        // }
 
         return "orderForm";
     }
