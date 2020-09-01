@@ -9,6 +9,8 @@ import org.springframework.web.context.annotation.SessionScope;
 
 import javax.annotation.PostConstruct;
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
 @SessionScope
 public class OrderBean implements Serializable
@@ -24,6 +26,13 @@ public class OrderBean implements Serializable
 
     private Order order;
 
+    private List<OrderItem> orderItemList;
+
+    public OrderBean() {
+        order = new Order();
+        orderItemList = new LinkedList<>();
+    }
+
     @PostConstruct
     void init() {
         for(final Integer id : orderItemBean.getSelectedCoffeeSortMap().keySet())
@@ -31,10 +40,33 @@ public class OrderBean implements Serializable
             OrderItem orderItem = new OrderItem();
             orderItem.setQuantity(Integer.parseInt(orderItemBean.getSelectedCoffeeSortMap().get(id)));
             orderItem.setIdCoffeeSort(id);
-
-            calculationService.calculateCoffeeCost(orderItemBean.getSelectedCoffeeSortMap());
-            //orderItemDao.add(orderItem);
+            orderItemList.add(orderItem);
         }
+
+        order.setCoffeeCost(calculationService.calculateCoffeeCost(orderItemBean.getSelectedCoffeeSortMap()));
+        order.setDeliveryCost(calculationService.calculateDeliveryCost(order.getCoffeeCost()));
+        order.setTotalCost(calculationService.calculateTotalCost(order.getCoffeeCost(), order.getDeliveryCost()));
+        //orderItemDao.add(orderItem);
     }
 
+    public String submit() {
+        order.setOrderItemList(orderItemList);
+        orderDao.add(order);
+        return "orderConfirm";
+    }
+
+    public Order getOrder()
+    {
+        return order;
+    }
+
+    public void setOrder(final Order order)
+    {
+        this.order = order;
+    }
+
+    public List<OrderItem> getOrderItemList()
+    {
+        return orderItemList;
+    }
 }

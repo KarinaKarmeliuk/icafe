@@ -46,7 +46,7 @@ public class OrderItemBean implements Serializable {
         //     orderItemDao.add(orderItem);
         // }
 
-        return "orderForm";
+        return "success";
     }
 
     public Map<Integer, String> getSelectedCoffeeSortMap()

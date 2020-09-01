@@ -12,60 +12,86 @@
     </title>
 </h:head>
 
-<div align="center">
-
-    <h:form>
-        <h:dataTable border="1" cellspacing="6">
-
-            <f:facet name="header">
-                <h:outputText value="Info for delivery" />
-            </f:facet>
-
-            <h:column>
-                <f:facet name="header">Full name</f:facet>
-                <h:inputText value=""/>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">Address</f:facet>
-                <h:inputText value=""/>
-            </h:column>
-
-        </h:dataTable>
-
-        <br/>
-
-        <h:dataTable border="1" cellspacing="6">
-
-            <f:facet name="header">
-                <h:outputText value="Order" />
-            </f:facet>
-
-            <h:column>
-                <f:facet name="header">Coffee sort name</f:facet>
-                <h:outputText value=""/>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">Price</f:facet>
-                <h:outputText value=""/>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">Quntity</f:facet>
-                <h:outputText value=""/>
-            </h:column>
-
-            <f:facet name="footer">
-                <h:outputText value="Total: " />
-            </f:facet>
-        </h:dataTable>
-    </h:form>
-
-</div>
-
 <h:body>
 
+    <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+                    xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" >
+
+        <div align="center">
+
+            <h:form>
+                <h:dataTable border="1" cellspacing="6">
+
+                    <f:facet name="header">
+                        <h:outputText value="Info for delivery" />
+                    </f:facet>
+
+                    <h:column>
+                        <f:facet name="header">Full name</f:facet>
+                        <h:inputText id="customerName" value="#{orderBean.order.clientName}">
+                            <f:validator validatorId="nameValidator"/>
+                        </h:inputText>
+                        <h:message for="customerName" style="color:blue"/>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Address</f:facet>
+                        <h:inputText id="address" value="#{orderBean.order.deliveryAddress}">
+                            <f:validator validatorId="addressValidator"/>
+                        </h:inputText>
+                        <h:message for="address" style="color:blue"/>
+                    </h:column>
+
+                </h:dataTable>
+
+                <br/>
+
+                <h:dataTable value="#{orderBean.orderItemList}" var="record"
+                             border="1" cellspacing="6">
+
+                    <f:facet name="header">
+                        <h:outputText value="Order" />
+                    </f:facet>
+
+                    <h:column>
+                        <f:facet name="header">Coffee sort name</f:facet>
+                        <h:outputText value="#{coffeeSortDao.get(record.id).sortName}"/>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Price</f:facet>
+                        <h:outputText value="#{coffeeSortDao.get(record.id).price}"/>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Quntity</f:facet>
+                        <h:outputText value="#{record.quantity}"/>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Total</f:facet>
+                        <h:outputText value="#{orderBean.order.coffeeCost}"/>
+                    </h:column>
+
+                    <f:facet name="footer">
+                        <div align="right">
+                            <h:outputText value="Order cost: #{orderBean.order.coffeeCost}"/>
+                            <br/>
+                            <h:outputText value="Delivery: #{orderBean.order.deliveryCost}"/>
+                            <br/>
+                            <h:outputText value="Total cost: #{orderBean.order.totalCost}"/>
+                        </div>
+                    </f:facet>
+                </h:dataTable>
+
+                <br/>
+
+                <h:commandButton value="Confirm order" action="#{orderBean.submit}"/>
+            </h:form>
+
+        </div>
+
+    </ui:composition>
 </h:body>
 
 </html>

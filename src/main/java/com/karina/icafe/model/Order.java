@@ -2,7 +2,6 @@ package com.karina.icafe.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -36,9 +35,7 @@ public class Order implements Serializable {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItemList;
 
-    public Order() {
-        orderItemList = new ArrayList<>();
-    }
+    public Order() {}
 
     public int getId() {
         return id;
