@@ -1,15 +1,12 @@
 package com.karina.icafe.beans;
 
-import com.karina.icafe.bo.CalculationService;
 import com.karina.icafe.dao.CoffeeSortDao;
 import com.karina.icafe.dao.OrderDao;
 import com.karina.icafe.model.Order;
 import com.karina.icafe.model.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.context.annotation.SessionScope;
 
-import javax.annotation.PostConstruct;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
@@ -20,9 +17,6 @@ public class OrderBean implements Serializable
 {
     @Autowired
     private OrderDao orderDao;
-
-    // @Autowired
-    // private OrderItemBean orderItemBean;
 
     @Autowired
     private CoffeeSortDao coffeeSortDao;
@@ -37,9 +31,10 @@ public class OrderBean implements Serializable
     }
 
     public String submit() {
-        order.setOrderItemList(orderItemList);
         order.setDateTime(new Date());
+        order.setOrderItemList(orderItemList);
         orderDao.add(order);
+
         return "orderConfirm";
     }
 

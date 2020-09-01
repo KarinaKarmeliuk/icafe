@@ -22,34 +22,28 @@
             <br/>
 
             <h:form>
-                <h:dataTable border="1" cellspacing="6">
 
-                    <f:facet name="header">
-                        <h:outputText value="Info for delivery" />
-                    </f:facet>
+                <h3>Delivery info</h3>
 
-                    <h:column>
-                        <f:facet name="header">Full name</f:facet>
-                        <h:inputText id="customerName" value="#{orderBean.order.clientName}">
-                            <f:validator validatorId="nameValidator"/>
-                        </h:inputText>
-                        <h:message for="customerName" style="color:blue"/>
-                    </h:column>
+                Full name: <h:inputText id="customerName" value="#{orderBean.order.clientName}" required="true" validatorMessage="This field is required!">
+            </h:inputText>
+                <span/>
+                <h:message for="customerName" style="color:red"/>
 
-                    <h:column>
-                        <f:facet name="header">Address</f:facet>
-                        <h:inputText id="address" value="#{orderBean.order.deliveryAddress}">
-                            <f:validator validatorId="addressValidator"/>
-                        </h:inputText>
-                        <h:message for="address" style="color:blue"/>
-                    </h:column>
+                <p/>
+                <p/>
 
-                </h:dataTable>
+                Address: <h:inputText id="address" value="#{orderBean.order.deliveryAddress}" required="true">
+                <f:validator validatorId="addressValidator"/>
+            </h:inputText>
+                <span/>
+                <h:message for="address" style="color:red"/>
 
-                <br/>
+                <p/>
+                <p/>
 
                 <h:dataTable value="#{orderBean.orderItemList}" var="record"
-                             border="1" cellspacing="6">
+                             border="1" cellspacing="10">
 
                     <f:facet name="header">
                         <h:outputText value="Order" />

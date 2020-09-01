@@ -10,14 +10,14 @@ CREATE TABLE coffee_sorts
 
 CREATE TABLE order_items
 (
-    id integer NOT NULL PRIMARY KEY,
+    id integer PRIMARY KEY,
     id_coffee_sort integer NOT NULL,
     quantity integer NOT NULL
 );
 
 CREATE TABLE orders
 (
-    id integer NOT NULL PRIMARY KEY,
+    id integer PRIMARY KEY,
     data_time timestamp without time zone NOT NULL,
     total_cost double precision NOT NULL,
     client_name character varying(255) NOT NULL,

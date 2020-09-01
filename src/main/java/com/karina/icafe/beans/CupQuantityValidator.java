@@ -1,4 +1,4 @@
-package com.karina.icafe.bo;
+package com.karina.icafe.beans;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -12,23 +12,25 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @ManagedBean
-@FacesValidator("addressValidator")
+@FacesValidator("cupQuantityValidator")
 @SessionScoped
-public class AddressValidator implements Validator {
-    private static final String ADDRESS_PATTERN = "^(?!\\s*$).+"; // String has at least one non-space character
+public class CupQuantityValidator implements Validator {
+
+    private static final String CUP_QUANTITY_PATTERN = "[1-9]{1,3}"; // numbers [1...9] at least 1 and at most 3 times
 
     private Pattern pattern;
 
-    public AddressValidator() {
-        pattern = Pattern.compile(ADDRESS_PATTERN);
+    public CupQuantityValidator() {
+        pattern = Pattern.compile(CUP_QUANTITY_PATTERN);
     }
 
     @Override
     public void validate(final FacesContext facesContext, final UIComponent uiComponent, final Object o) throws ValidatorException
     {
-        Matcher matcher = pattern.matcher(o.toString());
+        String quantity = (String) o;
+        Matcher matcher = pattern.matcher(quantity);
         if(!matcher.matches()) {
-            FacesMessage msg = new FacesMessage("Address validation failed.", "Invalid address format.");
+            FacesMessage msg = new FacesMessage("Invalid number format. Input value from 1 to 999");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }

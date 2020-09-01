@@ -1,26 +1,16 @@
 package com.karina.icafe.beans;
 
-import com.karina.icafe.bo.CalculationService;
-import com.karina.icafe.dao.CoffeeSortDao;
-import com.karina.icafe.dao.OrderItemDao;
 import com.karina.icafe.model.CoffeeSort;
 import com.karina.icafe.model.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.annotation.SessionScope;
 
-import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 @SessionScope
 public class OrderItemBean implements Serializable {
-
-    // @Autowired
-    // private OrderItemDao orderItemDao;
-    //
-    // @Autowired
-    // private CoffeeSortDao coffeeSortDao;
 
     @Autowired
     private CoffeeSortBean coffeeSortBean;

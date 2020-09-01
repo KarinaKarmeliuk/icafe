@@ -1,4 +1,4 @@
-package com.karina.icafe.bo;
+package com.karina.icafe.beans;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -12,15 +12,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @ManagedBean
-@FacesValidator("nameValidator")
+@FacesValidator("addressValidator")
 @SessionScoped
-public class NameValidator implements Validator {
-    private static final String NAME_PATTERN = "\\D\\B\\b{1,2}"; // NON-digit character, NON-word boundary, 1 or 2 backspaces
+public class AddressValidator implements Validator {
+    private static final String ADDRESS_PATTERN = "^(?!\\s*$).+"; // Not empty
 
     private Pattern pattern;
 
-    public NameValidator() {
-        pattern = Pattern.compile(NAME_PATTERN);
+    public AddressValidator() {
+        pattern = Pattern.compile(ADDRESS_PATTERN);
     }
 
     @Override
@@ -28,7 +28,7 @@ public class NameValidator implements Validator {
     {
         Matcher matcher = pattern.matcher(o.toString());
         if(!matcher.matches()) {
-            FacesMessage msg = new FacesMessage("Name validation failed.", "Invalid string format.");
+            FacesMessage msg = new FacesMessage("Address validation failed.", "Invalid address format.");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }

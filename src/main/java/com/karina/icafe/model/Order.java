@@ -2,6 +2,7 @@ package com.karina.icafe.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
 public class Order implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private int id;
 
@@ -30,12 +31,14 @@ public class Order implements Serializable {
     private String clientName;
 
     @Column(name = "delivery_address", nullable = false)
-    private double deliveryAddress;
+    private String deliveryAddress;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItemList;
 
-    public Order() {}
+    public Order() {
+        orderItemList = new ArrayList<>();
+    }
 
     public int getId() {
         return id;
@@ -85,11 +88,11 @@ public class Order implements Serializable {
         this.clientName = clientName;
     }
 
-    public double getDeliveryAddress() {
+    public String getDeliveryAddress() {
         return deliveryAddress;
     }
 
-    public void setDeliveryAddress(double deliveryAddress) {
+    public void setDeliveryAddress(String deliveryAddress) {
         this.deliveryAddress = deliveryAddress;
     }
 

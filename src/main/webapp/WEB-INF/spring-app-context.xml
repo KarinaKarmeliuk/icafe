@@ -47,13 +47,6 @@
 
     <bean id="orderItemBean" class="com.karina.icafe.beans.OrderItemBean"/>
 
-    <bean id="calculationServiceBean" class="com.karina.icafe.bo.CalculationService"/>
+    <bean id="calculationServiceBean" class="com.karina.icafe.beans.CalculationService"/>
 
-   <!-- <bean id="validatorNameBean" class="com.karina.icafe.bo.NameValidator"/>
-
-    <bean id="validatorCupQuaniityBean" class="com.karina.icafe.bo.CupQuantityValidator"/>
-
-    <bean id="validatorAddressBean" class="com.karina.icafe.bo.AddressValidator"/>-->
-
-<!--    <bean id="coffeeSortControllerBean" class="com.karina.icafe.controller.CoffeeSortController"/>-->
 </beans>
