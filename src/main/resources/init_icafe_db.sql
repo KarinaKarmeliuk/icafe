@@ -11,7 +11,6 @@ CREATE TABLE coffee_sorts
 CREATE TABLE order_items
 (
     id integer NOT NULL PRIMARY KEY,
-    id_coffee_sort integer NOT NULL,
     quantity integer NOT NULL
 );
 
