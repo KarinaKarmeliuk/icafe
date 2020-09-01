@@ -1,6 +1,7 @@
 package com.karina.icafe.beans;
 
 import com.karina.icafe.bo.CalculationService;
+import com.karina.icafe.dao.CoffeeSortDao;
 import com.karina.icafe.dao.OrderDao;
 import com.karina.icafe.model.Order;
 import com.karina.icafe.model.OrderItem;
@@ -23,6 +24,8 @@ public class OrderBean implements Serializable
     // @Autowired
     // private OrderItemBean orderItemBean;
 
+    @Autowired
+    private CoffeeSortDao coffeeSortDao;
 
     private Order order;
 
@@ -58,5 +61,13 @@ public class OrderBean implements Serializable
     public List<OrderItem> getOrderItemList()
     {
         return orderItemList;
+    }
+
+    public String getCoffeeSortNameById(int id) {
+        return coffeeSortDao.get(id).getSortName();
+    }
+
+    public String getCoffeePriceById(int id) {
+        return String.valueOf(coffeeSortDao.get(id).getPrice());
     }
 }

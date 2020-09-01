@@ -51,6 +51,7 @@ public class OrderItemBean implements Serializable {
             OrderItem orderItem = new OrderItem();
             orderItem.setQuantity(Integer.parseInt(selectedCoffeeSortMap.get(id)));
             orderItem.setIdCoffeeSort(id);
+            orderItem.setTotalCost(calculationService.calculateOrderItemCost(id, orderItem.getQuantity()));
             orderBean.getOrderItemList().add(orderItem);
         }
 

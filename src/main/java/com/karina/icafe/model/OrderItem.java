@@ -22,6 +22,9 @@ public class OrderItem implements Serializable {
     @Column(name = "id_coffee_sort")
     private int idCoffeeSort;
 
+    @Transient
+    private double totalCost;
+
     public OrderItem() {}
 
     public int getId() {
@@ -58,6 +61,16 @@ public class OrderItem implements Serializable {
     public void setIdCoffeeSort(final int idCoffeeSort)
     {
         this.idCoffeeSort = idCoffeeSort;
+    }
+
+    public double getTotalCost()
+    {
+        return totalCost;
+    }
+
+    public void setTotalCost(final double totalCost)
+    {
+        this.totalCost = totalCost;
     }
 
     @Override

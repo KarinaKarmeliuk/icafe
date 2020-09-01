@@ -1,5 +1,6 @@
 package com.karina.icafe.bo;
 
+import com.karina.icafe.beans.OrderItemBean;
 import com.karina.icafe.dao.CoffeeSortDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,15 +26,16 @@ public class CalculationService {
     private CoffeeSortDao coffeeSortDao;
 
     public double calculateCoffeeCost(Map<Integer, String> selectedCoffeeSortMap) {
-        double cost = 0.0;
+        double totalCost = 0.0;
+        double cost;
         for(Integer id : selectedCoffeeSortMap.keySet())
         {
             int quantity = Integer.parseInt(selectedCoffeeSortMap.get(id));
             int freeQuantity = quantity / Integer.parseInt(freeCupRate);
-            System.out.println("FREE quantity = " + freeQuantity);
-            cost += coffeeSortDao.get(id).getPrice() * (quantity - freeQuantity);
+            cost = coffeeSortDao.get(id).getPrice() * (quantity - freeQuantity);
+            totalCost += cost;
         }
-        return cost;
+        return totalCost;
     }
 
     public double calculateDeliveryCost(double coffeeCost) {
@@ -47,5 +49,12 @@ public class CalculationService {
 
     public double calculateTotalCost(double coffeeCost, double deliveryCost) {
         return coffeeCost + deliveryCost;
+    }
+
+    public double calculateOrderItemCost(int id, int quantity) {
+        double cost = 0.0;
+        int freeQuantity = quantity / Integer.parseInt(freeCupRate);
+        cost = coffeeSortDao.get(id).getPrice() * (quantity - freeQuantity);
+        return cost;
     }
 }
