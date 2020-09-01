@@ -19,6 +19,8 @@
 
         <div align="center">
 
+            <br/>
+
             <h:form>
                 <h:dataTable border="1" cellspacing="6">
 
@@ -64,7 +66,7 @@
                     </h:column>
 
                     <h:column>
-                        <f:facet name="header">Quntity</f:facet>
+                        <f:facet name="header">Quantity</f:facet>
                         <h:outputText value="#{record.quantity}"/>
                     </h:column>
 
@@ -87,6 +89,11 @@
                 <br/>
 
                 <h:commandButton value="Confirm order" action="#{orderBean.submit}"/>
+
+                <br/>
+                <br/>
+
+                <h:commandLink value="Back to shop page" action="index"/>
             </h:form>
 
         </div>

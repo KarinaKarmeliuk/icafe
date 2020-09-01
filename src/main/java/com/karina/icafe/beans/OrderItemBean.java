@@ -1,5 +1,6 @@
 package com.karina.icafe.beans;
 
+import com.karina.icafe.bo.CalculationService;
 import com.karina.icafe.dao.CoffeeSortDao;
 import com.karina.icafe.dao.OrderItemDao;
 import com.karina.icafe.model.CoffeeSort;
@@ -7,6 +8,7 @@ import com.karina.icafe.model.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.annotation.SessionScope;
 
+import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,12 +18,18 @@ public class OrderItemBean implements Serializable {
 
     // @Autowired
     // private OrderItemDao orderItemDao;
-
-    @Autowired
-    private CoffeeSortDao coffeeSortDao;
+    //
+    // @Autowired
+    // private CoffeeSortDao coffeeSortDao;
 
     @Autowired
     private CoffeeSortBean coffeeSortBean;
+
+    @Autowired
+    private OrderBean orderBean;
+
+    @Autowired
+    private CalculationService calculationService;
 
     private Map<Integer, String> selectedCoffeeSortMap;
 
@@ -38,15 +46,19 @@ public class OrderItemBean implements Serializable {
             }
         }
 
-        // for(final Integer id : selectedCoffeeSortMap.keySet())
-        // {
-        //     OrderItem orderItem = new OrderItem();
-        //     orderItem.setQuantity(Integer.parseInt(selectedCoffeeSortMap.get(id)));
-        //     orderItem.setIdCoffeeSort(id);
-        //     orderItemDao.add(orderItem);
-        // }
+        for(final Integer id : selectedCoffeeSortMap.keySet())
+        {
+            OrderItem orderItem = new OrderItem();
+            orderItem.setQuantity(Integer.parseInt(selectedCoffeeSortMap.get(id)));
+            orderItem.setIdCoffeeSort(id);
+            orderBean.getOrderItemList().add(orderItem);
+        }
 
-        return "success";
+        orderBean.getOrder().setCoffeeCost(calculationService.calculateCoffeeCost(selectedCoffeeSortMap));
+        orderBean.getOrder().setDeliveryCost(calculationService.calculateDeliveryCost(orderBean.getOrder().getCoffeeCost()));
+        orderBean.getOrder().setTotalCost(calculationService.calculateTotalCost(orderBean.getOrder().getCoffeeCost(), orderBean.getOrder().getDeliveryCost()));
+
+        return "orderForm";
     }
 
     public Map<Integer, String> getSelectedCoffeeSortMap()

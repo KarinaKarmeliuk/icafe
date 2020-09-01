@@ -5,10 +5,12 @@ import com.karina.icafe.dao.OrderDao;
 import com.karina.icafe.model.Order;
 import com.karina.icafe.model.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.context.annotation.SessionScope;
 
 import javax.annotation.PostConstruct;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,11 +20,9 @@ public class OrderBean implements Serializable
     @Autowired
     private OrderDao orderDao;
 
-    @Autowired
-    private OrderItemBean orderItemBean;
+    // @Autowired
+    // private OrderItemBean orderItemBean;
 
-    @Autowired
-    private CalculationService calculationService;
 
     private Order order;
 
@@ -33,24 +33,9 @@ public class OrderBean implements Serializable
         orderItemList = new LinkedList<>();
     }
 
-    @PostConstruct
-    void init() {
-        for(final Integer id : orderItemBean.getSelectedCoffeeSortMap().keySet())
-        {
-            OrderItem orderItem = new OrderItem();
-            orderItem.setQuantity(Integer.parseInt(orderItemBean.getSelectedCoffeeSortMap().get(id)));
-            orderItem.setIdCoffeeSort(id);
-            orderItemList.add(orderItem);
-        }
-
-        order.setCoffeeCost(calculationService.calculateCoffeeCost(orderItemBean.getSelectedCoffeeSortMap()));
-        order.setDeliveryCost(calculationService.calculateDeliveryCost(order.getCoffeeCost()));
-        order.setTotalCost(calculationService.calculateTotalCost(order.getCoffeeCost(), order.getDeliveryCost()));
-        //orderItemDao.add(orderItem);
-    }
-
     public String submit() {
         order.setOrderItemList(orderItemList);
+        order.setDateTime(new Date());
         orderDao.add(order);
         return "orderConfirm";
     }
@@ -63,6 +48,11 @@ public class OrderBean implements Serializable
     public void setOrder(final Order order)
     {
         this.order = order;
+    }
+
+    public void setOrderItemList(final List<OrderItem> orderItemList)
+    {
+        this.orderItemList = orderItemList;
     }
 
     public List<OrderItem> getOrderItemList()
