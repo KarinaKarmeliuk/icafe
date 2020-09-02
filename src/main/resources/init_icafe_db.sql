@@ -10,14 +10,17 @@ CREATE TABLE coffee_sorts
 
 CREATE TABLE order_items
 (
-    id integer PRIMARY KEY,
+    id integer NOT NULL PRIMARY KEY,
     id_coffee_sort integer NOT NULL,
-    quantity integer NOT NULL
+    id_order integer NOT NULL,
+    quantity integer NOT NULL,
+    FOREIGN KEY (id_coffee_sort) references coffee_sorts(id),
+    FOREIGN KEY (id_order) references orders(id) on DELETE CASCADE
 );
 
 CREATE TABLE orders
 (
-    id integer PRIMARY KEY,
+    id integer NOT NULL PRIMARY KEY,
     data_time timestamp without time zone NOT NULL,
     total_cost double precision NOT NULL,
     client_name character varying(255) NOT NULL,
