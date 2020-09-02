@@ -4,10 +4,8 @@ import com.karina.icafe.dao.CoffeeSortDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.web.context.annotation.SessionScope;
 
-import javax.annotation.PostConstruct;
 import java.util.Map;
 
 @SessionScope
@@ -25,16 +23,6 @@ public class CalculationService {
 
     @Autowired
     private CoffeeSortDao coffeeSortDao;
-
-    @Autowired
-    Environment environment;
-
-    // @PostConstruct
-    // void init() {
-    //     freeCupRate = Integer.parseInt(environment.getProperty("${icafe.settings.order.free-cup-rate}"));
-    //     deliveryCost = Integer.parseInt(environment.getProperty("${icafe.settings.order.delivery-cost}"));
-    //     totalCoffeeCostForFreeDelivery = Integer.parseInt("${icafe.settings.order.total-coffee-cost-for-free-delivery}");
-    // }
 
     public double calculateCoffeeCost(Map<Integer, String> selectedCoffeeSortMap) {
         double totalCost = 0.0;
