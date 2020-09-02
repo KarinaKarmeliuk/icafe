@@ -3,23 +3,21 @@ package com.karina.icafe.beans;
 import com.karina.icafe.dao.CoffeeSortDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.Map;
 
 @SessionScope
-@PropertySource("classpath:icafe_vars.properties")
 public class CalculationService {
 
-    //@Value("${icafe.settings.order.free-cup-rate}")
-    private int freeCupRate = 5;
+    @Value("${icafe.settings.order.free-cup-rate}")
+    private int freeCupRate;
 
-    //@Value("${icafe.settings.order.delivery-cost}")
-    private int deliveryCost = 2;
+    @Value("${icafe.settings.order.delivery-cost}")
+    private int deliveryCost;
 
-    //@Value("${icafe.settings.order.total-coffee-cost-for-free-delivery}")
-    private int totalCoffeeCostForFreeDelivery = 10;
+    @Value("${icafe.settings.order.total-coffee-cost-for-free-delivery}")
+    private int totalCoffeeCostForFreeDelivery;
 
     @Autowired
     private CoffeeSortDao coffeeSortDao;
