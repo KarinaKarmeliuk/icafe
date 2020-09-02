@@ -1,5 +1,6 @@
 package com.karina.icafe.beans;
 
+import com.karina.icafe.dao.OrderDao;
 import com.karina.icafe.model.CoffeeSort;
 import com.karina.icafe.model.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class OrderItemBean implements Serializable {
         // preparing order
         for(CoffeeSort coffeeSort : coffeeSortBean.getCoffeeSortList())
         {
-            if(!coffeeSort.isSelected()) {
+            if(!coffeeSort.isSelected() || selectedCoffeeSortMap.get(coffeeSort.getId()).isEmpty()) {
                 selectedCoffeeSortMap.remove(coffeeSort.getId());
             }
         }
@@ -50,7 +51,8 @@ public class OrderItemBean implements Serializable {
 
         orderBean.getOrder().setCoffeeCost(calculationService.calculateCoffeeCost(selectedCoffeeSortMap));
         orderBean.getOrder().setDeliveryCost(calculationService.calculateDeliveryCost(orderBean.getOrder().getCoffeeCost()));
-        orderBean.getOrder().setTotalCost(calculationService.calculateTotalCost(orderBean.getOrder().getCoffeeCost(), orderBean.getOrder().getDeliveryCost()));
+        orderBean.getOrder().setTotalCost(calculationService.calculateTotalCost(orderBean.getOrder().getCoffeeCost(),
+                                                                                orderBean.getOrder().getDeliveryCost()));
 
         return "orderForm";
     }
