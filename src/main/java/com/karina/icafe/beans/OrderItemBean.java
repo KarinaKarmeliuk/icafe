@@ -36,6 +36,9 @@ public class OrderItemBean implements Serializable {
             }
         }
 
+        if(selectedCoffeeSortMap.isEmpty())
+            return "index";
+
         for(final Integer id : selectedCoffeeSortMap.keySet())
         {
             OrderItem orderItem = new OrderItem();
