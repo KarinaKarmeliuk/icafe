@@ -31,11 +31,3 @@ INSERT INTO coffee_sorts VALUES (1, 'Arabica', 5.0, false);
 INSERT INTO coffee_sorts VALUES (2, 'Robusta', 6.5, false);
 INSERT INTO coffee_sorts VALUES (3, 'Latte', 4.0, false);
 INSERT INTO coffee_sorts VALUES (4, 'Mocco', 5.5, true);
-
-drop table coffee_sorts;
-drop table order_items;
-drop table orders;
-
-select * from coffee_sorts;
-select * from order_items;
-select * from orders;

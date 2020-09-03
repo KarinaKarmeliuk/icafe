@@ -25,15 +25,15 @@
 
                 <h3>Delivery info</h3>
 
-                Full name: <h:inputText id="customerName" value="#{orderBean.order.clientName}" required="true">
+                Full name: <h:inputText id="clientName" value="#{connectorBean.orderDto.clientName}" required="true">
             </h:inputText>
                 <span/>
-                <h:message for="customerName" style="color:red"/>
+                <h:message for="clientName" style="color:red"/>
 
                 <p/>
                 <p/>
 
-                Address: <h:inputText id="address" value="#{orderBean.order.deliveryAddress}" required="true">
+                Address: <h:inputText id="address" value="#{connectorBean.orderDto.deliveryAddress}" required="true">
                 <f:validator validatorId="addressValidator"/>
             </h:inputText>
                 <span/>
@@ -42,7 +42,7 @@
                 <p/>
                 <p/>
 
-                <h:dataTable value="#{orderBean.orderItemList}" var="record"
+                <h:dataTable value="#{connectorBean.orderItemDtoList}" var="record"
                              border="1" cellspacing="10">
 
                     <f:facet name="header">
@@ -51,12 +51,12 @@
 
                     <h:column>
                         <f:facet name="header">Coffee sort name</f:facet>
-                        <h:outputText value="#{orderBean.getCoffeeSortNameById(record.idCoffeeSort)}"/>
+                        <h:outputText value="#{record.sortCoffeeName}"/>
                     </h:column>
 
                     <h:column>
                         <f:facet name="header">Price, $</f:facet>
-                        <h:outputText value="#{orderBean.getCoffeePriceById(record.idCoffeeSort)}"/>
+                        <h:outputText value="#{record.price}"/>
                     </h:column>
 
                     <h:column>
@@ -66,23 +66,23 @@
 
                     <h:column>
                         <f:facet name="header">Total</f:facet>
-                        <h:outputText value="#{record.totalCost}"/>
+                        <h:outputText value="#{record.itemCost}"/>
                     </h:column>
 
                     <f:facet name="footer">
                         <div align="right">
-                            <h:outputText value="Order cost: #{orderBean.order.coffeeCost}"/>
+                            <h:outputText value="Order cost: #{connectorBean.orderDto.totalItemsCost}"/>
                             <br/>
-                            <h:outputText value="Delivery: #{orderBean.order.deliveryCost}"/>
+                            <h:outputText value="Delivery: #{connectorBean.orderDto.deliveryCost}"/>
                             <br/>
-                            <h:outputText value="Total cost: #{orderBean.order.totalCost}"/>
+                            <h:outputText value="Total cost: #{connectorBean.orderDto.totalCost}"/>
                         </div>
                     </f:facet>
                 </h:dataTable>
 
                 <br/>
 
-                <h:commandButton value="Confirm order" action="#{orderBean.submit}"/>
+                <h:commandButton value="Confirm order" action="#{orderMakerController.submit}"/>
 
                 <br/>
                 <br/>

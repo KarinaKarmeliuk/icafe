@@ -1,15 +1,19 @@
 package com.karina.icafe.model;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "coffee_sorts")
 public class CoffeeSort implements Serializable {
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private int id;
+
+    @OneToMany(mappedBy = "coffeeSort", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<OrderItem> orderItemList;
 
     @Column(name = "sort_name", nullable = false)
     private String sortName;
@@ -20,20 +24,16 @@ public class CoffeeSort implements Serializable {
     @Column(name = "disabled")
     private boolean disabled;
 
-    @Transient
-    private boolean selected;
-
-    @Transient
-    private int cupQuantity;
+    // @Transient
+    // private boolean selected;
+    //
+    // @Transient
+    // private int cupQuantity;
 
     public CoffeeSort() {}
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getSortName() {
@@ -62,23 +62,4 @@ public class CoffeeSort implements Serializable {
         this.disabled = disabled;
     }
 
-    public boolean isSelected()
-    {
-        return selected;
-    }
-
-    public void setSelected(final boolean selected)
-    {
-        this.selected = selected;
-    }
-
-    public int getCupQuantity()
-    {
-        return cupQuantity;
-    }
-
-    public void setCupQuantity(final int cupQuantity)
-    {
-        this.cupQuantity = cupQuantity;
-    }
 }

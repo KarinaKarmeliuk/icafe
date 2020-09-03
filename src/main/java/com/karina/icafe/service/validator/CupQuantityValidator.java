@@ -1,8 +1,8 @@
-package com.karina.icafe.beans;
+package com.karina.icafe.service.validator;
+
+import org.springframework.web.context.annotation.SessionScope;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
@@ -11,24 +11,25 @@ import javax.faces.validator.ValidatorException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@ManagedBean
-@FacesValidator("addressValidator")
-@SessionScoped
-public class AddressValidator implements Validator {
-    private static final String ADDRESS_PATTERN = "^(?!\\s*$).+"; // Not empty
+@FacesValidator("cupQuantityValidator")
+@SessionScope
+public class CupQuantityValidator implements Validator {
+
+    private static final String CUP_QUANTITY_PATTERN = "\b([1-9]{1,3})\b"; // numbers [1...9] at least 1 and at most 3 times
 
     private Pattern pattern;
 
-    public AddressValidator() {
-        pattern = Pattern.compile(ADDRESS_PATTERN);
+    public CupQuantityValidator() {
+        pattern = Pattern.compile(CUP_QUANTITY_PATTERN);
     }
 
     @Override
     public void validate(final FacesContext facesContext, final UIComponent uiComponent, final Object o) throws ValidatorException
     {
-        Matcher matcher = pattern.matcher(o.toString());
+        String quantity = (String) o;
+        Matcher matcher = pattern.matcher(quantity);
         if(!matcher.matches()) {
-            FacesMessage msg = new FacesMessage("Address validation failed.", "Invalid address format.");
+            FacesMessage msg = new FacesMessage("Invalid number format. Input value from 1 to 999");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }

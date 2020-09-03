@@ -4,19 +4,13 @@
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
 
-    <!-- JSF mapping -->
-    <servlet>
-        <servlet-name>Faces Servlet</servlet-name>
-        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-
     <!-- Add Support for Spring -->
     <listener>
         <listener-class>
             org.springframework.web.context.ContextLoaderListener
         </listener-class>
     </listener>
+
     <listener>
         <listener-class>
             org.springframework.web.context.request.RequestContextListener
@@ -28,9 +22,14 @@
         <param-value>/WEB-INF/spring-app-context.xml</param-value>
     </context-param>
 
-<!--    JSF mapping-->
+    <!-- JSF mapping -->
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
 
-<!--     Map these files with JSF-->
+    <!--     Map these files with JSF-->
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>

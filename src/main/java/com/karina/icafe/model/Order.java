@@ -16,13 +16,13 @@ public class Order implements Serializable {
     private int id;
 
     @Column(name = "date_time", nullable = false)
-    private Date dateTime;
+    private Date date_time;
 
-    @Transient
-    private double coffeeCost;
-
-    @Transient
-    private double deliveryCost;
+    // @Transient
+    // private double coffeeCost;
+    //
+    // @Transient
+    // private double deliveryCost;
 
     @Column(name="total_cost", nullable = false)
     private double totalCost;
@@ -44,32 +44,12 @@ public class Order implements Serializable {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Date getDate_time() {
+        return date_time;
     }
 
-    public Date getDateTime() {
-        return dateTime;
-    }
-
-    public void setDateTime(Date orderDateTime) {
-        this.dateTime = orderDateTime;
-    }
-
-    public double getCoffeeCost() {
-        return coffeeCost;
-    }
-
-    public void setCoffeeCost(double coffeeCost) {
-        this.coffeeCost = coffeeCost;
-    }
-
-    public double getDeliveryCost() {
-        return deliveryCost;
-    }
-
-    public void setDeliveryCost(double deliveryCost) {
-        this.deliveryCost = deliveryCost;
+    public void setDate_time(Date orderDateTime) {
+        this.date_time = orderDateTime;
     }
 
     public double getTotalCost() {

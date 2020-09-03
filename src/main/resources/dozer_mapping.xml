@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+  <mapping>
+    <class-a>com.karina.icafe.model.CoffeeSort</class-a>
+    <class-b>com.karina.icafe.dto.CoffeeSortDto</class-b>
+    <field>
+      <a>id</a>
+      <b>id</b>
+    </field>
+    <field>
+      <a>sortName</a>
+      <b>sortName</b>
+    </field>
+    <field>
+      <a>price</a>
+      <b>price</b>
+    </field>
+  </mapping>
+
+  <mapping>
+    <class-a>com.karina.icafe.model.OrderItem</class-a>
+    <class-b>com.karina.icafe.dto.OrderItemDto</class-b>
+    <field>
+      <a>id</a>
+      <b>id</b>
+    </field>
+    <field>
+      <a>quantity</a>
+      <b>quantity</b>
+    </field>
+    <field>
+      <a>coffeeSort</a>
+      <b>coffeeSort</b>
+    </field>
+    <field>
+      <a>order</a>
+      <b>order</b>
+    </field>
+  </mapping>
+
+  <mapping>
+    <class-a>com.karina.icafe.model.Order</class-a>
+    <class-b>com.karina.icafe.dto.OrderDto</class-b>
+    <field>
+      <a>itemCost</a>
+      <b>itemCost</b>
+    </field>
+    <field>
+      <a>clientName</a>
+      <b>clientName</b>
+    </field>
+    <field>
+      <a>deliveryAddress</a>
+      <b>deliveryAddress</b>
+    </field>
+  </mapping>
+
+</mappings>

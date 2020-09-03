@@ -5,7 +5,7 @@ import java.util.List;
 public interface Dao<T> {
     T get(int id);
 
-    List getAll();
+    List<T> getAll();
 
     void add(T t);
 

@@ -2,8 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:util="http://www.springframework.org/schema/util"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <context:annotation-config/>
 
@@ -11,13 +10,13 @@
 
     <context:property-placeholder location="classpath:icafe_vars.properties"/>
 
+    <!-- Hibernate integration beans-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.postgresql.Driver"/>
         <property name="url" value="jdbc:postgresql://localhost:5432/icafe_db"/>
         <property name="username" value="postgres"/>
         <property name="password" value="postgres"/>
     </bean>
-
 
     <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
@@ -38,18 +37,36 @@
     <bean id="persistenceExceptionTranslationPostProcessor"
           class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 
+    <!-- Mapper bean -->
+    <bean id="dozerMapper" class="org.dozer.spring.DozerBeanMapperFactoryBean">
+        <property name="mappingFiles" value="classpath*:/dozer_mapping.xml"/>
+    </bean>
+
+    <!-- DAO beans -->
     <bean id="coffeeSortDao" class="com.karina.icafe.dao.impl.CoffeeSortDaoImpl"/>
-
     <bean id="orderDao" class="com.karina.icafe.dao.impl.OrderDaoImpl"/>
-
     <bean id="orderItemDao" class="com.karina.icafe.dao.impl.OrderItemDaoImpl"/>
 
-    <bean id="coffeeSortBean" class="com.karina.icafe.beans.CoffeeSortBean"/>
+    <!--Controller beans -->
+    <bean id="coffeeSelectionController" class="com.karina.icafe.controller.CoffeeSelectionController"/>
+    <bean id="orderMakerController" class="com.karina.icafe.controller.OrderMakerController"/>
+    <bean id="orderConfirmController" class="com.karina.icafe.controller.OrderConfirmController"/>
 
-    <bean id="orderBean" class="com.karina.icafe.beans.OrderBean"/>
+    <!-- Service beans -->
+    <bean id="coffeeService" class="com.karina.icafe.service.CoffeeService"/>
+    <bean id="calculationServiceBean" class="com.karina.icafe.service.CalculationService"/>
 
-    <bean id="orderItemBean" class="com.karina.icafe.beans.OrderItemBean"/>
+    <!-- Service.Converter beans -->
+    <bean id="coffeeSortConverter" class="com.karina.icafe.service.converter.CoffeeSortConverter"/>
+    <bean id="orderItemConverter" class="com.karina.icafe.service.converter.OrderItemConverter"/>
+    <bean id="orderConverter" class="com.karina.icafe.service.converter.OrderConverter"/>
 
-    <bean id="calculationServiceBean" class="com.karina.icafe.beans.CalculationService"/>
+    <!-- Service.Validator beans -->
+    <bean id="cupQuantityValidator" class="com.karina.icafe.service.validator.CupQuantityValidator"/>
+    <bean id="addressValidator" class="com.karina.icafe.service.validator.AddressValidator"/>
+    <bean id="nameValidator" class="com.karina.icafe.service.validator.NameValidator"/>
+
+    <!-- Service.Connector bean -->
+    <bean id="connectorBean" class="com.karina.icafe.service.Connector"/>
 
 </beans>

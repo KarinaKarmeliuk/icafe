@@ -2,7 +2,6 @@ package com.karina.icafe.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
 
 @Entity
 @Table(name = "order_items")
@@ -13,27 +12,24 @@ public class OrderItem implements Serializable {
     @Column(name = "id")
     private int id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_order")
     private Order order;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_coffee_sort")
+    private CoffeeSort coffeeSort;
 
     @Column(name = "quantity")
     private int quantity;
 
-    @Column(name = "id_coffee_sort")
-    private int idCoffeeSort;
-
-    @Transient
-    private double totalCost;
+    // @Transient
+    // private double totalCost;
 
     public OrderItem() {}
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getQuantity() {
@@ -54,44 +50,14 @@ public class OrderItem implements Serializable {
         this.order = order;
     }
 
-    public int getIdCoffeeSort()
+    public CoffeeSort getCoffeeSort()
     {
-        return idCoffeeSort;
+        return coffeeSort;
     }
 
-    public void setIdCoffeeSort(final int idCoffeeSort)
+    public void setCoffeeSort(final CoffeeSort coffeeSort)
     {
-        this.idCoffeeSort = idCoffeeSort;
+        this.coffeeSort = coffeeSort;
     }
 
-    public double getTotalCost()
-    {
-        return totalCost;
-    }
-
-    public void setTotalCost(final double totalCost)
-    {
-        this.totalCost = totalCost;
-    }
-
-    @Override
-    public boolean equals(final Object o)
-    {
-        if(this == o)
-        {
-            return true;
-        }
-        if(o == null || getClass() != o.getClass())
-        {
-            return false;
-        }
-        OrderItem orderItem = (OrderItem) o;
-        return id == orderItem.id && quantity == orderItem.quantity && idCoffeeSort == orderItem.idCoffeeSort && Objects.equals(order, orderItem.order);
-    }
-
-    @Override
-    public int hashCode()
-    {
-        return Objects.hash(id, order, quantity, idCoffeeSort);
-    }
 }

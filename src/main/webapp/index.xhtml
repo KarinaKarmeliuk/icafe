@@ -26,7 +26,7 @@
             <br/>
 
             <h:form>
-                <h:dataTable value="#{coffeeSortBean.coffeeSortList}" var="record"
+                <h:dataTable value="#{coffeeSelectionController.coffeeSortDtoList}" var="record"
                 border="1" cellpadding="10">
                     
                     <f:facet name="header">
@@ -48,11 +48,11 @@
 
                     <h:column>
                         <f:facet name="header">Quantity</f:facet>
-                        <h:inputText id="quantityText" value="#{orderItemBean.selectedCoffeeSortMap[record.id]}">
+                        <h:inputText id="quantity" value="#{record.cupQuantity}">
                             <f:validator validatorId="cupQuantityValidator"/>
                         </h:inputText>
                         <span/>
-                        <h:message for="quantityText" style="color:red"/>
+                        <h:message for="quantity" style="color:red"/>
                     </h:column>
 
                     <f:facet name="footer">
@@ -62,7 +62,7 @@
 
                 <br/>
 
-                <h:commandButton value="Make order" action="#{orderItemBean.submit}">
+                <h:commandButton value="Make order" action="#{coffeeSelectionController.submit}">
                 </h:commandButton>
             </h:form>
 
