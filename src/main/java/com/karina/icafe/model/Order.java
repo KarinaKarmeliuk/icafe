@@ -18,12 +18,6 @@ public class Order implements Serializable {
     @Column(name = "date_time", nullable = false)
     private Date date_time;
 
-    // @Transient
-    // private double coffeeCost;
-    //
-    // @Transient
-    // private double deliveryCost;
-
     @Column(name="total_cost", nullable = false)
     private double totalCost;
 

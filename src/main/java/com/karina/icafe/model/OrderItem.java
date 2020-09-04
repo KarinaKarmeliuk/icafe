@@ -23,9 +23,6 @@ public class OrderItem implements Serializable {
     @Column(name = "quantity")
     private int quantity;
 
-    // @Transient
-    // private double totalCost;
-
     public OrderItem() {}
 
     public int getId() {

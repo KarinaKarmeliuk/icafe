@@ -13,7 +13,6 @@ import org.springframework.web.context.annotation.SessionScope;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 @SessionScope
@@ -44,10 +43,6 @@ public class OrderMakerController implements Serializable {
             orderItemList.get(orderItemList.size()-1).setOrder(order);
         }
 
-        // for(OrderItem orderItem : orderItemList)
-        // {
-        //     orderItem.setOrder(order);
-        // }
         order.setOrderItemList(orderItemList);
 
         coffeeService.saveToDatabase(order);

@@ -67,8 +67,6 @@
     <bean id="orderItemConverter" class="com.karina.icafe.service.converter.OrderItemConverter"/>
     <bean id="orderConverter" class="com.karina.icafe.service.converter.OrderConverter"/>
 
-    <!-- Service.Validator beans -->
-
     <!-- Service.Connector bean -->
     <bean id="connectorBean" class="com.karina.icafe.service.Connector"/>
 

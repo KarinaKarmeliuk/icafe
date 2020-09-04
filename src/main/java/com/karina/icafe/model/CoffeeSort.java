@@ -24,12 +24,6 @@ public class CoffeeSort implements Serializable {
     @Column(name = "disabled")
     private boolean disabled;
 
-    // @Transient
-    // private boolean selected;
-    //
-    // @Transient
-    // private int cupQuantity;
-
     public CoffeeSort() {}
 
     public int getId() {
