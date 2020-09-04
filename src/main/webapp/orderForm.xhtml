@@ -25,7 +25,10 @@
 
                 <h3>Delivery info</h3>
 
-                Full name: <h:inputText id="clientName" value="#{connectorBean.orderDto.clientName}" required="true">
+                Full name: <h:inputText id="clientName" value="#{connectorBean.orderDto.clientName}"
+                                        required="true" requiredMessage="Name is required!"
+                                        validatorMessage="Invalid name input">
+                <f:validateLength minimum="3"/>
             </h:inputText>
                 <span/>
                 <h:message for="clientName" style="color:red"/>
@@ -33,8 +36,10 @@
                 <p/>
                 <p/>
 
-                Address: <h:inputText id="address" value="#{connectorBean.orderDto.deliveryAddress}" required="true">
-                <f:validator validatorId="addressValidator"/>
+                Address: <h:inputText id="address" value="#{connectorBean.orderDto.deliveryAddress}"
+                                      required="true" requiredMessage="Name is required!"
+                                      validatorMessage="Invalid name input">
+                <f:validateLength minimum="2"/>
             </h:inputText>
                 <span/>
                 <h:message for="address" style="color:red"/>
@@ -77,6 +82,10 @@
                             <br/>
                             <h:outputText value="Total cost: #{connectorBean.orderDto.totalCost}"/>
                         </div>
+                        <hr/>
+                        <div align="left">
+                            <h:outputText value="*Each #{icafe_vars['icafe.settings.order.free-cup-rate']} cup is free!" />
+                        </div>
                     </f:facet>
                 </h:dataTable>
 
@@ -87,6 +96,9 @@
                 <br/>
                 <br/>
 
+            </h:form>
+
+            <h:form>
                 <h:commandLink value="Back to shop page" action="index"/>
             </h:form>
 

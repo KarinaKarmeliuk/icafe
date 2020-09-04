@@ -1,21 +1,25 @@
 package com.karina.icafe.dto;
 
+import com.karina.icafe.model.CoffeeSort;
+
 import java.io.Serializable;
 
 public class OrderItemDto implements Serializable
 {
     private int id;
     private int quantity;
+    private CoffeeSort coffeeSort;
     private String sortCoffeeName; // transient
     private double itemCost; // transient
     private double price; // transient
 
     public OrderItemDto() {}
 
-    public OrderItemDto(final int id, final int quantity, final String sortCoffeeName, final double price)
+    public OrderItemDto(final int id, final int quantity, CoffeeSort coffeeSort ,final String sortCoffeeName, final double price)
     {
         this.id = id;
         this.quantity = quantity;
+        this.coffeeSort = coffeeSort;
         this.sortCoffeeName = sortCoffeeName;
         this.price = price;
     }
@@ -23,6 +27,11 @@ public class OrderItemDto implements Serializable
     public int getId()
     {
         return id;
+    }
+
+    public void setId(final int id)
+    {
+        this.id = id;
     }
 
     public int getQuantity()
@@ -33,6 +42,16 @@ public class OrderItemDto implements Serializable
     public void setQuantity(final int quantity)
     {
         this.quantity = quantity;
+    }
+
+    public CoffeeSort getCoffeeSort()
+    {
+        return coffeeSort;
+    }
+
+    public void setCoffeeSort(final CoffeeSort coffeeSort)
+    {
+        this.coffeeSort = coffeeSort;
     }
 
     public String getSortCoffeeName()

@@ -1,7 +1,6 @@
 package com.karina.icafe.controller;
 
 import com.karina.icafe.dto.CoffeeSortDto;
-import com.karina.icafe.dto.OrderDto;
 import com.karina.icafe.dto.OrderItemDto;
 import com.karina.icafe.service.CalculationService;
 import com.karina.icafe.service.CoffeeService;
@@ -11,6 +10,7 @@ import org.springframework.web.context.annotation.SessionScope;
 
 import javax.annotation.PostConstruct;
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 @SessionScope
@@ -25,33 +25,26 @@ public class CoffeeSelectionController implements Serializable {
     @Autowired
     private CalculationService calculationService;
 
-    private List<CoffeeSortDto> coffeeSortDtoList;
+    private List<CoffeeSortDto> selectedCoffeeSortDtoList = new LinkedList<>();
 
     @PostConstruct
     void init() {
-        loadData();
-    }
-
-    public List<CoffeeSortDto> getCoffeeSortDtoList()
-    {
-        return coffeeSortDtoList;
-    }
-
-    public void loadData() {
-        coffeeSortDtoList = coffeeService.getCoffeeSortDtoList();
+        connector.loadData();
     }
 
     public String submit() {
-        for(CoffeeSortDto coffeeSortDto : coffeeSortDtoList)
+        for(CoffeeSortDto coffeeSortDto : connector.getCoffeeSortDtoList())
         {
-            if(!coffeeSortDto.isSelected())
-                coffeeSortDtoList.remove(coffeeSortDto);
+            if(coffeeSortDto.isSelected()) {
+                if(!coffeeSortDto.getCupQuantity().isEmpty())
+                    selectedCoffeeSortDtoList.add(coffeeSortDto);
+            }
         }
 
-        if(coffeeSortDtoList.isEmpty())
+        if(selectedCoffeeSortDtoList.isEmpty())
             return "index";
 
-        List<OrderItemDto> orderItemDtoList = coffeeService.createOrderItemDtoList(coffeeSortDtoList);
+        List<OrderItemDto> orderItemDtoList = coffeeService.createOrderItemDtoList(selectedCoffeeSortDtoList);
         calculationService.calculateOrderItems(orderItemDtoList);
         connector.setOrderItemDtoList(orderItemDtoList);
 
@@ -77,6 +70,7 @@ public class CoffeeSelectionController implements Serializable {
     }
 
     private void cleanUp() {
-        coffeeSortDtoList.clear();
+        //coffeeSortDtoList.clear();
+        selectedCoffeeSortDtoList.clear();
     }
 }

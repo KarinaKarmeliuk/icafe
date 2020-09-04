@@ -36,18 +36,14 @@
       <a>coffeeSort</a>
       <b>coffeeSort</b>
     </field>
-    <field>
-      <a>order</a>
-      <b>order</b>
-    </field>
   </mapping>
 
   <mapping>
     <class-a>com.karina.icafe.model.Order</class-a>
     <class-b>com.karina.icafe.dto.OrderDto</class-b>
     <field>
-      <a>itemCost</a>
-      <b>itemCost</b>
+      <a>date_time</a>
+      <b>date_time</b>
     </field>
     <field>
       <a>clientName</a>
@@ -56,6 +52,10 @@
     <field>
       <a>deliveryAddress</a>
       <b>deliveryAddress</b>
+    </field>
+    <field>
+      <a>totalCost</a>
+      <b>totalCost</b>
     </field>
   </mapping>
 

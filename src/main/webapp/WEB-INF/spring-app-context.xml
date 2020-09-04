@@ -43,9 +43,15 @@
     </bean>
 
     <!-- DAO beans -->
-    <bean id="coffeeSortDao" class="com.karina.icafe.dao.impl.CoffeeSortDaoImpl"/>
-    <bean id="orderDao" class="com.karina.icafe.dao.impl.OrderDaoImpl"/>
-    <bean id="orderItemDao" class="com.karina.icafe.dao.impl.OrderItemDaoImpl"/>
+    <bean id="coffeeSortDao" class="com.karina.icafe.dao.impl.CoffeeSortDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="orderDao" class="com.karina.icafe.dao.impl.OrderDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="orderItemDao" class="com.karina.icafe.dao.impl.OrderItemDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
 
     <!--Controller beans -->
     <bean id="coffeeSelectionController" class="com.karina.icafe.controller.CoffeeSelectionController"/>
@@ -62,9 +68,6 @@
     <bean id="orderConverter" class="com.karina.icafe.service.converter.OrderConverter"/>
 
     <!-- Service.Validator beans -->
-    <bean id="cupQuantityValidator" class="com.karina.icafe.service.validator.CupQuantityValidator"/>
-    <bean id="addressValidator" class="com.karina.icafe.service.validator.AddressValidator"/>
-    <bean id="nameValidator" class="com.karina.icafe.service.validator.NameValidator"/>
 
     <!-- Service.Connector bean -->
     <bean id="connectorBean" class="com.karina.icafe.service.Connector"/>

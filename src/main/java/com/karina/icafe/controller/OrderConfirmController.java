@@ -12,5 +12,9 @@ public class OrderConfirmController implements Serializable {
     @Autowired
     private Connector connector;
 
+    public String back() {
 
+        connector.loadData();
+        return "index";
+    }
 }

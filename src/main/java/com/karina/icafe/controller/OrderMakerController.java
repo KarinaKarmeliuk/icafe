@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.annotation.SessionScope;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,13 +36,18 @@ public class OrderMakerController implements Serializable {
         connector.getOrderDto().setDate_time(new Date());
 
         Order order = orderConverter.convertTo(connector.getOrderDto());
-        List<OrderItem> orderItemList = new LinkedList<>();
+        List<OrderItem> orderItemList = new ArrayList<>();
 
         for(OrderItemDto orderItemDto : connector.getOrderItemDtoList())
         {
             orderItemList.add(orderItemConverter.convertTo(orderItemDto));
+            orderItemList.get(orderItemList.size()-1).setOrder(order);
         }
 
+        // for(OrderItem orderItem : orderItemList)
+        // {
+        //     orderItem.setOrder(order);
+        // }
         order.setOrderItemList(orderItemList);
 
         coffeeService.saveToDatabase(order);

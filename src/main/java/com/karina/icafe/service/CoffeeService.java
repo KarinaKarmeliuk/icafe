@@ -32,8 +32,10 @@ public class CoffeeService {
         {
             orderItemDtoList.add(new OrderItemDto(coffeeSortDto.getId(),
                                                   Integer.parseInt(coffeeSortDto.getCupQuantity()),
+                                                  coffeeSortConverter.convertTo(coffeeSortDto),
                                                   coffeeSortDto.getSortName(),
-                                                  coffeeSortDto.getPrice()));
+                                                  coffeeSortDto.getPrice())
+            );
         }
         return orderItemDtoList;
     }

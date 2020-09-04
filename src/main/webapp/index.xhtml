@@ -26,7 +26,7 @@
             <br/>
 
             <h:form>
-                <h:dataTable value="#{coffeeSelectionController.coffeeSortDtoList}" var="record"
+                <h:dataTable value="#{connectorBean.coffeeSortDtoList}" var="record"
                 border="1" cellpadding="10">
                     
                     <f:facet name="header">
@@ -48,8 +48,8 @@
 
                     <h:column>
                         <f:facet name="header">Quantity</f:facet>
-                        <h:inputText id="quantity" value="#{record.cupQuantity}">
-                            <f:validator validatorId="cupQuantityValidator"/>
+                        <h:inputText id="quantity" value="#{record.cupQuantity}" validatorMessage="Invalid number format. Input value from 1 to 999">
+                            <f:validateRegex pattern="\b([1-9]{1,3})\b"/>
                         </h:inputText>
                         <span/>
                         <h:message for="quantity" style="color:red"/>

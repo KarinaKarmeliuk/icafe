@@ -8,6 +8,15 @@ CREATE TABLE coffee_sorts
     disabled boolean NOT NULL
 );
 
+CREATE TABLE orders
+(
+    id integer NOT NULL PRIMARY KEY,
+    date_time timestamp without time zone NOT NULL,
+    total_cost double precision NOT NULL,
+    client_name character varying(255) NOT NULL,
+    delivery_address character varying(255) NOT NULL
+);
+
 CREATE TABLE order_items
 (
     id integer NOT NULL PRIMARY KEY,
@@ -16,15 +25,6 @@ CREATE TABLE order_items
     quantity integer NOT NULL,
     FOREIGN KEY (id_coffee_sort) references coffee_sorts(id),
     FOREIGN KEY (id_order) references orders(id) on DELETE CASCADE
-);
-
-CREATE TABLE orders
-(
-    id integer NOT NULL PRIMARY KEY,
-    data_time timestamp without time zone NOT NULL,
-    total_cost double precision NOT NULL,
-    client_name character varying(255) NOT NULL,
-    delivery_address character varying(255) NOT NULL
 );
 
 INSERT INTO coffee_sorts VALUES (1, 'Arabica', 5.0, false);

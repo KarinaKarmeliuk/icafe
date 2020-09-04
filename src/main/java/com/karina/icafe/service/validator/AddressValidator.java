@@ -1,18 +1,17 @@
 package com.karina.icafe.service.validator;
 
-import org.springframework.web.context.annotation.SessionScope;
+import org.springframework.web.context.annotation.RequestScope;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
-import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@FacesValidator("addressValidator")
-@SessionScope
+//@FacesValidator("addressValidator")
+
 public class AddressValidator implements Validator {
     private static final String ANTI_ADDRESS_PATTERN = "(\\S+)?(\\S*)"; // null, empty
 

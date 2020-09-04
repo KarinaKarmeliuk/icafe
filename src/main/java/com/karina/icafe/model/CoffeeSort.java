@@ -36,6 +36,11 @@ public class CoffeeSort implements Serializable {
         return id;
     }
 
+    public void setId(final int id)
+    {
+        this.id = id;
+    }
+
     public String getSortName() {
         return sortName;
     }
