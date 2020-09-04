@@ -39,7 +39,8 @@ public class OrderMakerController implements Serializable {
 
         for(OrderItemDto orderItemDto : connector.getOrderItemDtoList())
         {
-            orderItemList.add(orderItemConverter.convertTo(orderItemDto));
+            OrderItem orderItem = new OrderItem(orderItemConverter.convertTo(orderItemDto));
+            orderItemList.add(orderItem);
             orderItemList.get(orderItemList.size()-1).setOrder(order);
         }
 

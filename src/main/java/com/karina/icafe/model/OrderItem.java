@@ -25,6 +25,12 @@ public class OrderItem implements Serializable {
 
     public OrderItem() {}
 
+    public OrderItem(OrderItem orderItem) {
+        this.order = orderItem.getOrder();
+        this.coffeeSort = orderItem.getCoffeeSort();
+        this.quantity = orderItem.getQuantity();
+    }
+
     public int getId() {
         return id;
     }

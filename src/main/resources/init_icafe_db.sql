@@ -24,7 +24,7 @@ CREATE TABLE order_items
     id_order integer NOT NULL,
     quantity integer NOT NULL,
     FOREIGN KEY (id_coffee_sort) references coffee_sorts(id),
-    FOREIGN KEY (id_order) references orders(id) on DELETE CASCADE
+    FOREIGN KEY (id_order) references orders(id) on DELETE CASCADE on UPDATE CASCADE
 );
 
 INSERT INTO coffee_sorts VALUES (1, 'Arabica', 5.0, false);
